@@ -1,8 +1,16 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Livewire\Categories;
+use App\Livewire\CategoriesCreate;
+use App\Livewire\CategoriesEdit;
+use App\Livewire\CategoriesShow;
+
+
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,4 +37,14 @@ Route::middleware(['auth'])->group(function () {
             ),
         )
         ->name('two-factor.show');
+    
+
+    /* CATEGORIES */
+    Route::get('/categories', Categories::class)->name('categories.index');
+    Route::get('/categories/create', CategoriesCreate::class)->name('categories.create');
+    Route::get('/categories/show/{category}', CategoriesShow::class)->name('categories.show');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('/categories/edit/{category}', CategoriesEdit::class)->name('categories.edit');
+
 });
