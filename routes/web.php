@@ -6,6 +6,8 @@ use App\Livewire\Categories;
 use App\Livewire\CategoriesCreate;
 use App\Livewire\CategoriesEdit;
 use App\Livewire\CategoriesShow;
+use App\Livewire\Entries;
+use App\Livewire\EntriesCreate;
 use App\Livewire\Tags;
 use App\Livewire\TagsCreate;
 use App\Livewire\TagsEdit;
@@ -40,7 +42,11 @@ Route::middleware(['auth'])->group(function () {
             ),
         )
         ->name('two-factor.show');
+
     
+    /* ENTRIES */
+    Route::get('/entries', Entries::class)->name('entries.index');
+    Route::get('/entries/create', EntriesCreate::class)->name('entries.create');
 
     /* CATEGORIES */
     Route::get('/categories', Categories::class)->name('categories.index');
