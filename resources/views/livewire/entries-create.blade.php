@@ -21,6 +21,31 @@
             <!-- INFO -->
             <div class="mx-auto w-11/12 mt-4 pb-4 rounded-sm flex flex-col gap-2">                              
 
+                <!-- Date -->
+                <div class="flex flex-col md:flex-row gap-2">
+
+                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
+                        <div class="bg-black text-white p-1 rounded-md">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>                    
+                        <div class="w-full">
+                            <span class="text-lg font-semibold capitalize">date</span>
+                        </div>                    
+                    </div>
+                    
+                    <div class="flex flex-row justify-start items-center p-0 w-full">
+                        <input wire:model="date" name="date" id="date" type="date" value="{{ old('date') }}"                                    
+                                    class="w-fit rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
+                    </div>
+
+                </div>
+
+                @error('date')
+                    <div class="text-sm text-red-600 font-semibold">
+                        {{ $message }}                                
+                    </div>
+                @enderror
+
                 <!-- Title -->
                 <div class="flex flex-col md:flex-row gap-2">
 
@@ -35,7 +60,6 @@
                     
                     <div class="flex flex-row justify-start items-center p-0 w-full">
                         <input wire:model="title" name="title" id="title" type="text" value="{{ old('title') }}"
-                                    maxlength="200"
                                     class="w-full rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
                     </div>
                     
@@ -45,164 +69,8 @@
                     <div class="text-sm text-red-600 font-semibold">
                         {{ $message }}                                
                     </div>
-                @enderror                
-
-                <!-- Date -->
-                <div class="flex flex-col md:flex-row gap-2">
-
-                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
-                        <div class="bg-black text-white p-1 rounded-md">
-                            <i class="fa-solid fa-calendar-days"></i>
-                        </div>                    
-                        <div class="w-full">
-                            <span class="text-lg font-semibold capitalize">date</span>
-                        </div>                    
-                    </div>
-                    
-                    <div class="flex flex-row justify-start items-center p-0 w-full">
-                        <input wire:model="date" name="date" id="date" type="date" value="{{ old('date') }}"
-                                    maxlength="200"
-                                    class="w-fit rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
-                    </div>
-
-                </div>
-
-                @error('date')
-                    <div class="text-sm text-red-600 font-semibold">
-                        {{ $message }}                                
-                    </div>
-                @enderror 
-                
-                <!-- Description -->
-                <div class="flex flex-col md:flex-row gap-2">
-
-                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
-                        <div class="bg-black text-white p-1 rounded-md">
-                            <i class="fa-solid fa-industry"></i>
-                        </div>                    
-                        <div class="w-full">
-                            <span class="text-lg font-semibold capitalize">description</span>
-                        </div>                    
-                    </div>
-                    
-                    <div class="flex flex-row justify-start items-center p-0 w-full">
-                        <input wire:model="description" name="description" id="description" type="text" value="{{ old('description') }}"
-                                    maxlength="200"
-                                    class="w-full rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
-                    </div>
-                    
-                </div>
-                
-                @error('description')
-                    <div class="text-sm text-red-600 font-semibold">
-                        {{ $message }}                                
-                    </div>
                 @enderror
 
-                <!-- Url -->
-                <div class="flex flex-col md:flex-row gap-2">
-
-                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
-                        <div class="bg-black text-white p-1 rounded-md">
-                            <i class="fa-solid fa-industry"></i>
-                        </div>                    
-                        <div class="w-full">
-                            <span class="text-lg font-semibold capitalize">url</span>
-                        </div>                    
-                    </div>
-                    
-                    <div class="flex flex-row justify-start items-center p-0 w-full">
-                        <input wire:model="url" name="url" id="url" type="text" value="{{ old('url') }}"
-                                    maxlength="200"
-                                    class="w-full rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
-                    </div>
-                    
-                </div>
-                
-                @error('url')
-                    <div class="text-sm text-red-600 font-semibold">
-                        {{ $message }}                                
-                    </div>
-                @enderror
-
-                <!-- Place -->
-                <div class="flex flex-col md:flex-row gap-2">
-
-                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
-                        <div class="bg-black text-white p-1 rounded-md">
-                            <i class="fa-solid fa-industry"></i>
-                        </div>                    
-                        <div class="w-full">
-                            <span class="text-lg font-semibold capitalize">place</span>
-                        </div>                    
-                    </div>
-                    
-                    <div class="flex flex-row justify-start items-center p-0 w-full">
-                        <input wire:model="place" name="place" id="place" type="text" value="{{ old('place') }}"
-                                    maxlength="200"
-                                    class="w-full rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
-                    </div>
-                    
-                </div>
-                
-                @error('place')
-                    <div class="text-sm text-red-600 font-semibold">
-                        {{ $message }}                                
-                    </div>
-                @enderror
-
-                <!-- Autor -->
-                <div class="flex flex-col md:flex-row gap-2">
-
-                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
-                        <div class="bg-black text-white p-1 rounded-md">
-                            <i class="fa-solid fa-industry"></i>
-                        </div>                    
-                        <div class="w-full">
-                            <span class="text-lg font-semibold capitalize">autor</span>
-                        </div>                    
-                    </div>
-                    
-                    <div class="flex flex-row justify-start items-center p-0 w-full">
-                        <input wire:model="autor" name="autor" id="autor" type="text" value="{{ old('autor') }}"
-                                    maxlength="200"
-                                    class="w-full rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
-                    </div>
-                    
-                </div>
-                
-                @error('autor')
-                    <div class="text-sm text-red-600 font-semibold">
-                        {{ $message }}                                
-                    </div>
-                @enderror
-
-                <!-- Value -->
-                <div class="flex flex-col md:flex-row gap-2">
-
-                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
-                        <div class="bg-black text-white p-1 rounded-md">
-                            <i class="fa-solid fa-eur"></i>
-                        </div>                    
-                        <div class="w-full">
-                            <span class="text-lg font-semibold capitalize">value</span>
-                        </div>                    
-                    </div>
-                    
-                    <div class="flex flex-row justify-start items-center p-0 w-full">
-                        <input wire:model="value" name="value" id="value" type="any" value="{{ old('value') }}"
-                                    maxlength="8"
-                                    class="w-full md:w-24 rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
-                    </div>
-                    
-                </div>
-                
-                @error('value')
-                    <div class="text-sm text-red-600 font-semibold">
-                        {{ $message }}                                
-                    </div>
-                @enderror
-                
                 <!-- Category -->
                 <div class="flex flex-col md:flex-row gap-2">
 
@@ -263,7 +131,133 @@
                         {{ $message }}                                
                     </div>
                 @enderror
+                
+                <!-- Description -->
+                <div class="flex flex-col md:flex-row gap-2">
 
+                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
+                        <div class="bg-black text-white p-1 rounded-md">
+                            <i class="fa-solid fa-align-left"></i>
+                        </div>                    
+                        <div class="w-full">
+                            <span class="text-lg font-semibold capitalize">description</span>
+                        </div>                    
+                    </div>
+                    
+                    <div class="flex flex-row justify-start items-center p-0 w-full">
+                        <input wire:model="description" name="description" id="description" type="text" value="{{ old('description') }}"
+                                    class="w-full rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
+                    </div>
+                    
+                </div>
+                
+                @error('description')
+                    <div class="text-sm text-red-600 font-semibold">
+                        {{ $message }}                                
+                    </div>
+                @enderror
+
+                <!-- Url -->
+                <div class="flex flex-col md:flex-row gap-2">
+
+                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
+                        <div class="bg-black text-white p-1 rounded-md">
+                            <i class="fa-solid fa-link"></i>
+                        </div>                    
+                        <div class="w-full">
+                            <span class="text-lg font-semibold capitalize">url</span>
+                        </div>                    
+                    </div>
+                    
+                    <div class="flex flex-row justify-start items-center p-0 w-full">
+                        <input wire:model="url" name="url" id="url" type="text" value="{{ old('url') }}"
+                                    class="w-full rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
+                    </div>
+                    
+                </div>
+                
+                @error('url')
+                    <div class="text-sm text-red-600 font-semibold">
+                        {{ $message }}                                
+                    </div>
+                @enderror
+
+                <!-- Place -->
+                <div class="flex flex-col md:flex-row gap-2">
+
+                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
+                        <div class="bg-black text-white p-1 rounded-md">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>                    
+                        <div class="w-full">
+                            <span class="text-lg font-semibold capitalize">place</span>
+                        </div>                    
+                    </div>
+                    
+                    <div class="flex flex-row justify-start items-center p-0 w-full">
+                        <input wire:model="place" name="place" id="place" type="text" value="{{ old('place') }}"
+                                    class="w-full rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
+                    </div>
+                    
+                </div>
+                
+                @error('place')
+                    <div class="text-sm text-red-600 font-semibold">
+                        {{ $message }}                                
+                    </div>
+                @enderror
+
+                <!-- Autor -->
+                <div class="flex flex-col md:flex-row gap-2">
+
+                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
+                        <div class="bg-black text-white p-1 rounded-md">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>                    
+                        <div class="w-full">
+                            <span class="text-lg font-semibold capitalize">autor</span>
+                        </div>                    
+                    </div>
+                    
+                    <div class="flex flex-row justify-start items-center p-0 w-full">
+                        <input wire:model="autor" name="autor" id="autor" type="text" value="{{ old('autor') }}"
+                                    class="w-full rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
+                    </div>
+                    
+                </div>
+                
+                @error('autor')
+                    <div class="text-sm text-red-600 font-semibold">
+                        {{ $message }}                                
+                    </div>
+                @enderror
+
+                <!-- Value -->
+                <div class="flex flex-col md:flex-row gap-2">
+
+                    <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
+                        <div class="bg-black text-white p-1 rounded-md">
+                            <i class="fa-solid fa-eur"></i>
+                        </div>                    
+                        <div class="w-full">
+                            <span class="text-lg font-semibold capitalize">value</span>
+                        </div>                    
+                    </div>
+                    
+                    <div class="flex flex-row justify-start items-center p-0 w-full">
+                        <input wire:model="value" name="value" id="value" type="any" value="{{ old('value') }}"
+                                    maxlength="8"
+                                    class="w-full md:w-24 rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
+                    </div>
+                    
+                </div>
+                
+                @error('value')
+                    <div class="text-sm text-red-600 font-semibold">
+                        {{ $message }}                                
+                    </div>
+                @enderror            
+                
                 <!-- Info -->
                 <div class="flex flex-col md:flex-row gap-2">
 
@@ -272,7 +266,7 @@
                             <i class="fa-solid fa-info"></i>
                         </div>                    
                         <div class="w-full">
-                            <span class="text-lg font-semibold capitalize">extra information</span>
+                            <span class="text-lg font-semibold capitalize">information</span>
                         </div>                    
                     </div>
                     

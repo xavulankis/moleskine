@@ -545,28 +545,26 @@
                                         id {!! $sortLink !!}</th>                                    
                                     <th wire:click="sorting('date')" scope="col"
                                         class="p-2 hover:cursor-pointer {{ $column == 'date' ? 'text-yellow-400' : '' }}">
-                                        Date {!! $sortLink !!}</th>
-                                    @if(!$smallView)
+                                        Date {!! $sortLink !!}</th>                                    
                                     <th wire:click="sorting('title')" scope="col"
                                         class="p-2 hover:cursor-pointer {{ $column == 'title' ? 'text-yellow-400' : '' }}">
                                         Title {!! $sortLink !!}</th>
-                                    @endif
+                                    <th wire:click="sorting('category_name')" scope="col"
+                                        class="p-2 hover:cursor-pointer {{ $column == 'category_name' ? 'text-yellow-400' : '' }}">
+                                        category {!! $sortLink !!}</th>
+                                    <th scope="col" class="p-2 text-center">tags</th> 
+                                    @if(!$smallView)
+                                    <th wire:click="sorting('autor')" scope="col"
+                                        class="p-2 hover:cursor-pointer {{ $column == 'autor' ? 'text-yellow-400' : '' }}">
+                                        Autor {!! $sortLink !!}</th>
                                     <th wire:click="sorting('place')" scope="col"
                                         class="p-2 hover:cursor-pointer {{ $column == 'place' ? 'text-yellow-400' : '' }}">
                                         Place {!! $sortLink !!}</th>                                    
                                     <th wire:click="sorting('value')" scope="col"
                                         class="p-2 hover:cursor-pointer {{ $column == 'value' ? 'text-yellow-400' : '' }}">
-                                        Value <span class="text-sm">(€)</span> {!! $sortLink !!}</th>
-                                    <th wire:click="sorting('autor')" scope="col"
-                                        class="p-2 hover:cursor-pointer {{ $column == 'autor' ? 'text-yellow-400' : '' }}">
-                                        Autor {!! $sortLink !!}</th>                                    
-                                    <th wire:click="sorting('category_name')" scope="col"
-                                        class="p-2 hover:cursor-pointer {{ $column == 'category_name' ? 'text-yellow-400' : '' }}">
-                                        category {!! $sortLink !!}</th>
-                                    @if(!$smallView)
-                                        <th scope="col" class="p-2 text-center">tags</th>                                    
-                                        <th scope="col" class="text-center">Files</th>
-                                    @endif
+                                        Value <span class="text-sm">(€)</span> {!! $sortLink !!}</th>                                                                        
+                                    @endif                                                                       
+                                    <th scope="col" class="text-center">Files</th>
                                     <th scope="col" class="p-2 text-center">actions</th>
                                 </tr>
                             </thead>
@@ -585,25 +583,27 @@
                                         </td>
                                         <td class="p-2 pr-12 {{ $column == 'id' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ $entry->id }}</td>                                       
                                         <td class="p-2 pr-12 {{ $column == 'date' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ date('d-m-Y', strtotime($entry->date)) }}</td>
-                                        @if(!$smallView)
-                                        <td class="p-2 pr-12 {{ $column == 'title' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}"> {{ $entry->title }}</td>
-                                        @endif
-                                        <td class="p-2 pr-12 {{ $column == 'place' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}"> <a
-                                                href="#">{{ $entry->place }}</a>
-                                        </td>
-                                        <td class="p-2 pr-16 {{ $column == 'value' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ $entry->value }}</td>
-                                        <td class="p-2 pr-12 {{ $column == 'autor' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ $entry->autor }}</td>
+                                        
+                                        <td class="p-2 pr-12 {{ $column == 'title' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}"> <a
+                                                href="{{ route('entries.show', $entry) }}">{{ $entry->title }}</a></td>
+
                                         <td class="p-2 pr-12 {{ $column == 'category_name' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ $entry->category_name }}</td>
-                                        @if(!$smallView)
+    
                                         <td class="p-2">
                                             @foreach ($entry->tags as $tags)
                                                 {{$tags->name}} 
                                             @endforeach
-                                        </td>         
-                                        @endif                               
+                                        </td>                                    
+                                        
                                         @if(!$smallView)
+                                        <td class="p-2 pr-12 {{ $column == 'autor' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ !empty($entry->autor) ? $entry->autor : '-' }}</td>
+                                        <td class="p-2 pr-12 {{ $column == 'place' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ !empty($entry->place) ? $entry->place : '-' }}</td>
+                                        <td class="p-2 pr-16 {{ $column == 'value' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ !empty($entry->value) ? $entry->value : '-' }}</td>
+                                        @endif   
+                                        
                                         <td class="text-sm text-black p-2">
-                                            <div class="flex flex-col justify-between items-center gap-2">                                                
+                                            <div class="flex flex-col justify-between items-center gap-2">     
+                                            @if($entry->files->count() !== 0)                                          
                                                @foreach ($entry->files as $file)
                                                     @include('partials.mediatypes-file', [
                                                         'file' => $file,
@@ -611,9 +611,11 @@
                                                         'imagesBig' => false,
                                                     ])
                                                 @endforeach
+                                            @else
+                                            -                                            
+                                            @endif
                                             </div>
                                         </td>
-                                        @endif
                                         <!-- ACTIONS --> 
                                         <td class="p-2">
                                             <div class="flex justify-center items-center gap-2">

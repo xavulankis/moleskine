@@ -174,7 +174,7 @@
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-layer-group"></i>
+                        <i class="fa-solid fa-tags"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">tags</span>
@@ -197,40 +197,15 @@
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-money-bill"></i>
+                        <i class="fa-solid fa-align-left"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">description</span>
-                    </div>                    
-                </div>
-                
-                <div class="flex flex-row justify-start items-center p-0 w-full">
-                    <span 
-                        class="w-full md:w-fit rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
-                        @if (isset($entry->description))  
-                            <span> {{ $entry->description}}</span>
-                        @else 
-                            <span>-</span>
-                        @endif 
-                    </span>
-                </div>
-
-            </div>     
-            
-            <!-- URL -->
-            <div class="flex flex-col md:flex-row gap-2">
-
-                <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
-                    <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-pen"></i>
-                    </div>                    
-                    <div class="w-full">
-                        <span class="text-lg font-semibold capitalize">url</span>
                     </div>
                     <div class="flex flex-row justify-start items-center p-2 md:hidden">
-                        <span x-data="{ show: false }" class="relative" data-tooltip="Copy Url">
-                            <button class="btn" data-clipboard-target="#url" x-on:click="show = true"
-                                x-on:mouseout="show = false" title="Copy Url">
+                        <span x-data="{ show: false }" class="relative" data-tooltip="Copy Description">
+                            <button class="btn" data-clipboard-target="#description" x-on:click="show = true"
+                                x-on:mouseout="show = false" title="Copy Description">
                                 <i class="fa-solid fa-copy"></i>
                             </button>
                             <span x-show="show" class="absolute -top-8 -right-6">
@@ -244,14 +219,14 @@
 
                     <div class="flex flex-row p-2 bg-zinc-100 w-full">
                         <span 
-                        id="url">
-                        {{ $entry->url }}</span>
+                        id="description">
+                        {{ $entry->description }}</span>
                     </div>
 
                     <div class="flex flex-row justify-start items-center p-2 max-sm:hidden">
-                        <span x-data="{ show: false }" class="relative" data-tooltip="Copy Url">
-                            <button class="btn cursor-pointer" data-clipboard-target="#url" x-on:click="show = true"
-                                x-on:mouseout="show = false" title="Copy Url">
+                        <span x-data="{ show: false }" class="relative" data-tooltip="Copy Description">
+                            <button class="btn cursor-pointer" data-clipboard-target="#description" x-on:click="show = true"
+                                x-on:mouseout="show = false" title="Copy Description">
                                 <i class="fa-solid fa-copy"></i>
                             </button>
                             <span x-show="show" class="absolute -top-8 -right-6">
@@ -262,14 +237,39 @@
 
                 </div>
 
-            </div>                           
+            </div>
+
+            <!-- URL -->
+            <div class="flex flex-col md:flex-row gap-2">
+
+                <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
+                    <div class="bg-black text-white p-1 rounded-md">
+                        <i class="fa-solid fa-link"></i>
+                    </div>                    
+                    <div class="w-full">
+                        <span class="text-lg font-semibold capitalize">url</span>
+                    </div>                    
+                </div>
+                
+                <div class="flex flex-row justify-start items-center p-0 w-full">
+                    <span 
+                        class="w-full md:w-fit rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
+                        @if (isset($entry->url))  
+                            <span> <a href="{{$entry->url}}" target="_blank" title="Open"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></span>
+                        @else 
+                            <span>-</span>
+                        @endif 
+                    </span>
+                </div>
+
+            </div>
 
             <!-- Place -->
             <div class="flex flex-col md:flex-row gap-2">
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-money-bill"></i>
+                        <i class="fa-solid fa-location-dot"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">place</span>
@@ -294,7 +294,7 @@
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-money-bill"></i>
+                        <i class="fa-solid fa-circle-user"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">autor</span>
@@ -319,7 +319,7 @@
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-money-bill"></i>
+                        <i class="fa-solid fa-eur"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">value</span>
@@ -347,7 +347,7 @@
                         <i class="fa-solid fa-info"></i>
                     </div>                    
                     <div class="w-full">
-                            <span class="text-lg font-semibold capitalize">extra information</span>
+                            <span class="text-lg font-semibold capitalize">information</span>
                         </div>
                     @if (strip_tags($entry->info) != '')
                     <div class="flex flex-row justify-start items-center p-2 md:hidden">
