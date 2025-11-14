@@ -36,95 +36,95 @@ class EntryController extends Controller
     /**
      * Export the collection as excel file
      */
-    // public function export(Request $request) 
-    // {   
+    public function export(Request $request) 
+    {   
         
-    //     dd($request);
-    //     $criteriaSelection = json_decode($request->criteriaSelection, true);
+        //dd($request);
+        $criteriaSelection = json_decode($request->criteriaSelection, true);
         
-    //     $criteriaName = $this->entryService->getCriteriaFilename($criteriaSelection);
-    //     //dd($resultado);
-    //     //dd($request->entries);
-    //     $criteria = $request->criteriaSelection;
-    //     //dd($criteria);
+        $criteriaName = $this->entryService->getCriteriaFilename($criteriaSelection);
+        //dd($resultado);
+        //dd($request->entries);
+        $criteria = $request->criteriaSelection;
+        //dd($criteria);
 
-    //     // listEntries is a string, remove [ ] from start and end of the string
-    //     $stringListEntries = substr($request->entries, 1, -1);
+        // listEntries is a string, remove [ ] from start and end of the string
+        $stringListEntries = substr($request->entries, 1, -1);
 
-    //     // convert string to array of Ids
-    //     $listIds = explode(',',$stringListEntries);
+        // convert string to array of Ids
+        $listIds = explode(',',$stringListEntries);
 
-    //     // File name
-    //     if($criteria != '[]')
-    //     {
-    //         if ($request->entryType == 'archive')
-    //         {
-    //             $excelFileName = 'ARCHIVE_Kakebo_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
-    //         }
-    //         else {
-    //             $excelFileName = 'Kakebo_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
-    //         }            
-    //     }
-    //     else {
+        // File name
+        if($criteria != '[]')
+        {
+            if ($request->entryType == 'archive')
+            {
+                $excelFileName = 'ARCHIVE_Kakebo_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
+            }
+            else {
+                $excelFileName = 'Kakebo_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
+            }            
+        }
+        else {
 
-    //         if ($request->entryType == 'archive')
-    //         {
-    //             $excelFileName = 'ARCHIVE_Kakebo_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
-    //         }
-    //         else {
-    //             $excelFileName = 'Kakebo_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
-    //         }
-    //     }
+            if ($request->entryType == 'archive')
+            {
+                $excelFileName = 'ARCHIVE_Kakebo_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
+            }
+            else {
+                $excelFileName = 'Kakebo_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
+            }
+        }
         
-    //     return Excel::download(new EntryExport($request->entryType, false, $listIds, $this->entryService),  $excelFileName);
-    // }
+        return Excel::download(new EntryExport($request->entryType, false, $listIds, $this->entryService),  $excelFileName);
+    }
 
     /**
      * Export the collection as excel file
      */
-    // public function exportBulk(Request $request) 
-    // {                
+    public function exportBulk(Request $request) 
+    {                
         
-    //     //dd($request);
+        //dd($request);
 
-    //     $criteriaSelection = json_decode($request->criteriaSelection, true);        
-    //     $criteriaName = $this->entryService->getCriteriaFilename($criteriaSelection);
-    //     $criteria = $request->criteriaSelection;
-    //     //dd($criteria);
+        $criteriaSelection = json_decode($request->criteriaSelection, true);        
+        $criteriaName = $this->entryService->getCriteriaFilename($criteriaSelection);
+        $criteria = $request->criteriaSelection;
+        //dd($criteria);
 
-    //     // convert string to array of Ids
-    //     $listIds = explode(',',$request->listEntriesBulk);   
-    //     //$excelFileName = Auth::user()->name . '_BulkEntries('. count($listIds) .').xlsx';
+        // convert string to array of Ids
+        $listIds = explode(',',$request->listEntriesBulk);   
+        //$excelFileName = Auth::user()->name . '_BulkEntries('. count($listIds) .').xlsx';
 
 
-    //     // File name
-    //     if($criteria != '[]')
-    //     {
-    //         if ($request->entryType == 'archive')
-    //         {
-    //             $excelFileName = 'ARCHIVE_Kakebo_Bulk_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
-    //         }
-    //         else {
-    //             $excelFileName = 'Kakebo_Bulk_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
-    //         }            
-    //     }
-    //     else {
+        // File name
+        if($criteria != '[]')
+        {
+            if ($request->entryType == 'archive')
+            {
+                $excelFileName = 'ARCHIVE_Kakebo_Bulk_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
+            }
+            else {
+                $excelFileName = 'Kakebo_Bulk_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
+            }            
+        }
+        else {
 
-    //         if ($request->entryType == 'archive')
-    //         {
-    //             $excelFileName = 'ARCHIVE_Kakebo_Bulk_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
-    //         }
-    //         else {
-    //             $excelFileName = 'Kakebo_Bulk_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
-    //         }
-    //     }
+            if ($request->entryType == 'archive')
+            {
+                $excelFileName = 'ARCHIVE_Kakebo_Bulk_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
+            }
+            else {
+                $excelFileName = 'Kakebo_Bulk_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
+            }
+        }
 
-    //     //print_r($listIds);
-    //     //print_r($excelFileName);
-    //     //dd('export Bulk');
+        //print_r($listIds);
+        //print_r($excelFileName);
+        //dd('export Bulk');
 
-    //     return Excel::download(new EntryExport($request->entryType, false, $listIds, $this->entryService), $excelFileName);
-    // }
+        return Excel::download(new EntryExport($request->entryType, false, $listIds, $this->entryService), $excelFileName);
+    }
 
 
 

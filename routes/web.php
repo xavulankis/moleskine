@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\TagController;
+use App\Livewire\Archive;
+use App\Livewire\ArchiveShow;
 use App\Livewire\Categories;
 use App\Livewire\CategoriesCreate;
 use App\Livewire\CategoriesEdit;
@@ -56,9 +59,23 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/entries/{entry}', [EntryController::class, 'destroy'])->name('entries.destroy');
     Route::get('/entries/edit/{entry}', EntriesEdit::class)->name('entries.edit');    
 
+    // EXCEL 
+    Route::post('/entries/export', [EntryController::class, 'export'])->name('entries.export');
+    Route::post('/entries/exportbulk', [EntryController::class, 'exportBulk'])->name('entries.exportbulk');
+
     /* FILES */
     Route::get('/entries/{entry}/file', FileUpload::class)->name('files.upload');
     Route::delete('/entries/{entry}/file/{file}', [FileController::class, 'destroy'])->name('files.destroy');
+    
+
+    /* ARCHIVE */
+    Route::get('/archive', Archive::class)->name('archive.index');
+    Route::get('/archive/show/{archive}', ArchiveShow::class)->name('archive.show');
+    Route::put('/archive/{archive}', [ArchiveController::class, 'restore'])->name('archive.restore');
+    Route::delete('/archive/{archive}', [ArchiveController::class, 'destroy'])->name('archive.destroy');
+
+    // test delete file from archive
+    //Route::delete('/archive/{archive}/file/{file}', [FileController::class, 'destroyarchive'])->name('files.destroyarchive');
 
     /* CATEGORIES */
     Route::get('/categories', Categories::class)->name('categories.index');

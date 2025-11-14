@@ -70,7 +70,7 @@ class FileService
      */
     public function deleteOneFile(mixed $file)
     {
-        if (Storage::disk('public')->exists($file->path)) {
+        if (Storage::disk('public')->exists($file->path)) {            
             /*  echo $file->path;
              dd('borradito'); */
             Storage::disk('public')->delete($file->path);

@@ -5,7 +5,7 @@
         <div class="flex flex-col bg-green-600 p-1 mb-2 text-white text-sm rounded-sm">        
             <div class="flex row justify-between items-center">
                 <span class="font-bold">{{ session('message') }}</span>
-                <a href="/entries/" class="cursor-pointer" title="Close">
+                <a href="/archive/" class="cursor-pointer" title="Close">
                     <i class="fa-solid fa-xmark hover:text-gray-600 transition-all duration-500"></i>
                 </a>
             </div>
@@ -15,7 +15,7 @@
         <div class="flex flex-col bg-red-600 p-1 mb-2 text-white text-sm rounded-sm">        
             <div class="flex row justify-between items-center">
                 <span class="font-bold">{{ session('error') }}</span>
-                <a href="/entries/" class="cursor-pointer" title="Close">
+                <a href="/archive/" class="cursor-pointer" title="Close">
                     <i class="fa-solid fa-xmark hover:text-gray-600 transition-all duration-500"></i>
                 </a>
             </div>
@@ -26,14 +26,9 @@
     <div class="flex flex-row justify-between items-center gap-2 p-2 font-bold uppercase bg-black text-white rounded-sm">
         
         <div>
-            <a href="/entries" class="border-b-2 border-b-yellow-400">Entries</a> 
+            <a href="/archive" class="border-b-2 border-b-yellow-400">Archive</a> 
         </div>
-
-        <div>
-            <a href="{{ route('entries.create') }}"
-                class="capitalize text-white text-sm rounded-sm p-1 bg-blue-600 text-black hover:text-white transition duration-1000 ease-in-out"
-                title="Create New Entry">new entry</a>
-        </div>
+        
     </div>
 
     <div class="overflow-hidden py-2 bg-zinc-200">
@@ -471,7 +466,7 @@
                                 <input type="hidden" id="criteriaSelection" name="criteriaSelection"
                                     value="{{ json_encode($this->criteria) }}"> 
                                 <input type="hidden" id="entryType" name="entryType"
-                                    value="active">                     
+                                    value="archive">                     
                                 <button
                                     class="hover:text-amber-600 transition duration-1000 ease-in-out cursor-pointer"
                                     title="Export All as Excel file">
@@ -491,17 +486,28 @@
                                 <span class="font-bold capitalize">bulk actions </span>
                                 <span>selected ({{ count($okselections) }})</span>
                             </div>
-                    
-                            <div class="flex flex-row gap-2">                            
+                            
+                            <div class="flex flex-row gap-2">  
+                                <!-- Unselect -->                          
                                 <a wire:click.prevent="bulkClear" class="cursor-pointer" title="Unselect Entries">
                                     <i class="fa-solid fa-rotate-right text-blue-600"></i>
                                 </a>
 
+                                <!-- Restore -->
+                                <a wire:click.prevent="bulkRestore" wire:confirm="Restore this entries?"
+                                    title="Restore"
+                                    class="cursor-pointer text-black hover:text-green-400 transition duration-1000 ease-in-out">
+                                    <span><i class="fa-sm fa-solid fa-rotate-right"></i></span>
+                                    <span>({{ count($selections) }})</span>
+                                </a>
+
+                                <!-- Delete --> 
                                 <a wire:click.prevent="bulkDelete" wire:confirm="Are you sure you want to delete this items?"
                                     class="cursor-pointer" title="Delete Selected">
                                     <i class="fa-solid fa-trash text-red-600"></i>
                                 </a>
 
+                                <!-- Export --> 
                                 <form action="{{ route('entries.exportbulk') }}" method="POST">
                                         <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                         @csrf
@@ -510,7 +516,7 @@
                                         <input type="hidden" id="criteriaSelection" name="criteriaSelection"
                                             value="{{ json_encode($this->criteria) }}"> 
                                         <input type="hidden" id="entryType" name="entryType"
-                                            value="active">
+                                            value="archive">
                                         <button class="cursor-pointer" title="Export Selected as Excel file">
                                             <i class="fa-solid fa-file-export text-green-600"></i>
                                         </button>
@@ -618,35 +624,36 @@
                                         <td class="p-2">
                                             <div class="flex justify-center items-center gap-2">
                                                 <!-- Show -->
-                                                <a href="{{ route('entries.show', $entry) }}" title="Show">
+                                                <a href="{{ route('archive.show', $entry->id) }}" title="Show">
                                                     <i
                                                         class="fa-solid fa-circle-info text-orange-600 hover:text-orange-700 transition duration-1000 ease-in-out"></i>
                                                 </a>
-                                                <!-- Upload File -->
-                                                <a href="{{ route('files.upload', $entry) }}" title="Upload File">
-                                                    <span
-                                                        class="text-violet-600 hover:text-violet-700 transition-all duration-500 tooltip"><i
-                                                            class="fa-solid fa-file-arrow-up"></i>
-                                                        <!-- <span class="tooltiptext">Upload File</span> -->
-                                                    </span>
-                                                </a>
-                                                <!-- Edit -->
-                                                <a href="{{ route('entries.edit', $entry) }}" title="Edit">                                                    
-                                                    <i
-                                                        class="fa-solid fa-pen-to-square text-green-600 hover:text-green-700 transition duration-1000 ease-in-out"></i>
-                                                </a>
-                                                <!-- Delete -->
-                                                <form action="{{ route('entries.destroy', $entry) }}" method="POST">
+                                                <!-- Restore -->                                                 
+                                                <form action="{{ route('archive.restore', $entry->id) }}" method="POST">
                                                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                     @csrf
                                                     <!-- Dirtective to Override the http method -->
-                                                    @method('DELETE')
-                                                    <button
-                                                        onclick="return confirm('Are you sure you want to delete the entry: {{ $entry->title }}?')"
-                                                        title="Delete this entry"
-                                                        class="cursor-pointer">                                                        
+                                                    @method('PUT')
+                                                    <button   
+                                                        onclick="return confirm('Entry with (ID: {{  $entry->id }}) will be restored')"                                                     
+                                                        title="Restore">                                                        
                                                         <i
-                                                            class="fa-solid fa-trash text-red-600 hover:text-red-700 transition-all duration-500 cursor-pointer"></i>
+                                                        class="fa-solid fa-rotate-right text-green-600 hover:text-green-700 transition duration-1000 ease-in-out"></i>
+                                                    </button>
+                                                </form>
+                                                <!-- Delete -->
+                                                <form action="{{ route('archive.destroy', $entry) }}" method="POST">
+                                                <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                                @csrf
+                                                <!-- Dirtective to Override the http method -->
+                                                @method('DELETE')
+                                                    <button
+                                                        onclick="return confirm('Delete PERMANENTLY Entry with (ID: {{  $entry->id }})?')"                                                        
+                                                        title="Delete PERMANENTLY">                                                        
+                                                        <span
+                                                            class="text-red-600 hover:text-black transition-all duration-500">
+                                                            <i
+                                                                class="fa-solid fa-trash"></i></span>
                                                     </button>
                                                 </form>                                              
                                             </div>

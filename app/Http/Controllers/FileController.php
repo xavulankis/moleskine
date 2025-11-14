@@ -26,4 +26,15 @@ class FileController extends Controller
         
         return back()->with('message', 'File ' . $file->original_filename . ' deleted.');
     }
+
+     /**
+     * Remove the specified resource from storage.
+     */
+    // public function destroyarchive(Entry $archive, File $file)
+    // {   
+    //     dd($file);
+    //     $this->fileService->deleteOneFile($file);
+        
+    //     return back()->with('message', 'File ' . $file->original_filename . ' deleted.');
+    // }
 }
