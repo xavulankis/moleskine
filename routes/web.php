@@ -4,6 +4,7 @@ use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TagController;
 use App\Livewire\Archive;
 use App\Livewire\ArchiveShow;
@@ -67,6 +68,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/entries/{entry}/file', FileUpload::class)->name('files.upload');
     Route::delete('/entries/{entry}/file/{file}', [FileController::class, 'destroy'])->name('files.destroy');
     
+    /* PDF */
+    Route::get('/generate_pdf/{data}', [PDFController::class, 'generateEntryPDF'])->name('entries_pdf.generate');
 
     /* ARCHIVE */
     Route::get('/archive', Archive::class)->name('archive.index');

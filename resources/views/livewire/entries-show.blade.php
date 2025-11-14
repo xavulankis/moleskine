@@ -38,7 +38,7 @@
         <div class="flex flex-row w-11/12 mx-auto justify-end items-center p-2 gap-2 border-b-1 border-b-zinc-400">
                                             
                 <!-- PDF -->
-                <a href="#" title="Download as PDF">
+                <a href="{{ route('entries_pdf.generate', $entry) }}" title="Download as PDF">
                     <i
                         class="fa-solid fa-file-pdf hover:text-amber-600 transition-all duration-500"></i>
                 </a>
