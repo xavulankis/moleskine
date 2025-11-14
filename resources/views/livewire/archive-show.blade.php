@@ -16,7 +16,7 @@
         <div class="flex flex-row w-11/12 mx-auto justify-end items-center p-2 gap-2 border-b-1 border-b-zinc-400">
                                             
                 <!-- PDF -->
-                <a href="#" title="Download as PDF">
+                <a href="{{ route('entries_archive_pdf.generate', $archive) }}" title="Download as PDF">
                     <i
                         class="fa-solid fa-file-pdf hover:text-amber-600 transition-all duration-500"></i>
                 </a>
@@ -426,7 +426,20 @@
                                                 <!-- Download file -->
                                                 
                                                 <!-- Delete file -->
-                                                
+                                                <form action="{{ route('files.destroyfilearchive', [$archive, $file]) }}"
+                                                    method="POST">
+                                                    <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                                    @csrf
+                                                    <!-- Dirtective to Override the http method -->
+                                                    @method('DELETE')
+                                                    <button
+                                                        onclick="return confirm('Are you sure you want to delete the file: {{ $file->original_filename }}?')"
+                                                        title="Delete file">
+                                                        <span
+                                                            class="text-red-600 hover:text-red-500 transition-all duration-500 cursor-pointer"><i
+                                                                class="fa-lg fa-solid fa-trash"></i></span>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
 

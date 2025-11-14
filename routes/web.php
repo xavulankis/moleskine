@@ -70,6 +70,7 @@ Route::middleware(['auth'])->group(function () {
     
     /* PDF */
     Route::get('/generate_pdf/{data}', [PDFController::class, 'generateEntryPDF'])->name('entries_pdf.generate');
+    Route::get('/generate_archive_pdf/{data}', [PDFController::class, 'generateArchiveEntryPDF'])->name('entries_archive_pdf.generate');
 
     /* ARCHIVE */
     Route::get('/archive', Archive::class)->name('archive.index');
@@ -77,8 +78,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/archive/{archive}', [ArchiveController::class, 'restore'])->name('archive.restore');
     Route::delete('/archive/{archive}', [ArchiveController::class, 'destroy'])->name('archive.destroy');
 
-    // test delete file from archive
-    //Route::delete('/archive/{archive}/file/{file}', [FileController::class, 'destroyarchive'])->name('files.destroyarchive');
+    // test delete file from archive, need to specify the archiveID because it is a softdelete
+    Route::delete('/archive/{archive}/file/{file}', [FileController::class, 'destroyfilearchive'])->name('files.destroyfilearchive');
 
     /* CATEGORIES */
     Route::get('/categories', Categories::class)->name('categories.index');

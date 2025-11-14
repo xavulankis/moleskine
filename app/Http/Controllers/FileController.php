@@ -22,19 +22,21 @@ class FileController extends Controller
      */
     public function destroy(Entry $entry, File $file)
     {          
-        $this->fileService->deleteOneFile($file);
+        //dd($file);
+        $this->fileService->deleteOneFile($file, true);
         
         return back()->with('message', 'File ' . $file->original_filename . ' deleted.');
     }
 
      /**
      * Remove the specified resource from storage.
+     * use int archiveID instead of Entry archive, does not recognize the Entry because it is a softdelete.
      */
-    // public function destroyarchive(Entry $archive, File $file)
-    // {   
-    //     dd($file);
-    //     $this->fileService->deleteOneFile($file);
+    public function destroyfilearchive(int $archiveID, File $file)
+    {   
+        //dd($archiveID, $file);
+        $this->fileService->deleteOneFile($file, false);
         
-    //     return back()->with('message', 'File ' . $file->original_filename . ' deleted.');
-    // }
+        return back()->with('message', 'File ' . $file->original_filename . ' deleted.');
+    }
 }

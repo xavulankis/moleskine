@@ -61,15 +61,17 @@ class FileService
     public function deleteFiles(Collection $files)
     {
         foreach ($files as $file) {
-            $this->deleteOneFile($file);
+            $this->deleteOneFile($file, true);
         }
     }
 
     /**
      * Delete the file from the path, and then delete the file from the DB
+     * $entryType is false is an archive, true is a normal entry
      */
-    public function deleteOneFile(mixed $file)
+    public function deleteOneFile(mixed $file, bool $entryType)
     {
+        //dd($file, $entryType);
         if (Storage::disk('public')->exists($file->path)) {            
             /*  echo $file->path;
              dd('borradito'); */
