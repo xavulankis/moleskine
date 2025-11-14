@@ -568,7 +568,13 @@
                                         @if(!$smallView)
                                         <td class="text-sm text-black p-2">
                                             <div class="flex flex-col justify-between items-center gap-2">                                                
-                                               FILES
+                                               @foreach ($entry->files as $file)
+                                                    @include('partials.mediatypes-file', [
+                                                        'file' => $file,
+                                                        'iconSize' => 'fa-lg',
+                                                        'imagesBig' => false,
+                                                    ])
+                                                @endforeach
                                             </div>
                                         </td>
                                         @endif
@@ -581,7 +587,13 @@
                                                         class="fa-solid fa-circle-info text-orange-600 hover:text-orange-700 transition duration-1000 ease-in-out"></i>
                                                 </a>
                                                 <!-- Upload File -->
-                                                U
+                                                <a href="{{ route('files.upload', $entry) }}" title="Upload File">
+                                                    <span
+                                                        class="text-violet-600 hover:text-violet-700 transition-all duration-500 tooltip"><i
+                                                            class="fa-solid fa-file-arrow-up"></i>
+                                                        <!-- <span class="tooltiptext">Upload File</span> -->
+                                                    </span>
+                                                </a>
                                                 <!-- Edit -->
                                                 <a href="{{ route('entries.edit', $entry) }}" title="Edit">                                                    
                                                     <i

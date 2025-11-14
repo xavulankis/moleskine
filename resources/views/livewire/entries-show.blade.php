@@ -47,7 +47,18 @@
                     <i class="fa-solid fa-pencil hover:text-green-600 transition-all duration-500"></i>
                 </a>
                 <!-- Delete -->
-                DELETE
+                <form action="{{ route('entries.destroy', $entry) }}" method="POST">
+                    <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                    @csrf
+                    <!-- Dirtective to Override the http method -->
+                    @method('DELETE')
+                    <button
+                        onclick="return confirm('Are you sure you want to delete this entry')"
+                        title="Delete">
+                        <i
+                            class="fa-solid fa-trash hover:text-red-600 transition-all duration-500 cursor-pointer"></i>
+                    </button>
+                </form>
             
         </div>
 
@@ -251,9 +262,7 @@
 
                 </div>
 
-            </div>
-
-                           
+            </div>                           
 
             <!-- Place -->
             <div class="flex flex-col md:flex-row gap-2">
@@ -382,7 +391,107 @@
             </div>
 
             <!-- Files -->
-            
+            <div class="flex flex-col md:flex-row gap-2">
+
+                <div class="flex flex-row justify-start items-center md:w-1/3 gap-2 h-full">
+                        <div class="bg-black text-white p-1 rounded-md">
+                        <i class="fa-solid fa-file"></i>
+                    </div>                    
+                    <div class="w-full h-full">
+                        <span class="text-lg font-semibold capitalize">Files ({{ $entry->files->count() }})</span>
+                    </div>                    
+                </div>
+                
+                <div class="flex flex-col justify-start items-center w-full">
+                    
+                    @if ($entry->files->count() > 0)
+                        <!-- FILES TABLE -->
+                        <div class="w-full overflow-x-auto">
+                        
+                            <table class="table-auto w-full border text-sm">
+                                <thead class="text-sm text-center text-white bg-black">
+                                    <th></th>
+                                    <th class="p-2 max-lg:hidden">Filename</th>
+                                    <th class="p-2 max-sm:hidden">Created</th>
+                                    <th class="p-2 max-sm:hidden">Size <span class="text-xs">(KB)</span></th>
+                                    <th class="p-2">Format</th>
+                                    <th></th>
+                                </thead>
+
+                                @foreach ($entry->files as $file)
+                                    <tr class="bg-white border-b text-center">
+                                        <td class="p-2">
+                                            @include('partials.mediatypes-file', [
+                                                'file' => $file,
+                                                'iconSize' => 'fa-lg',
+                                                'imagesBig' => false,
+                                            ])
+                                        </td>
+                                        <td class="p-2 max-lg:hidden">
+                                            {{ $file->original_filename }}
+                                        </td>
+                                        <td class="p-2 max-sm:hidden">{{ $file->created_at->format('d-m-Y') }}
+                                        </td>
+                                        <td class="p-2 max-sm:hidden">{{ round($file->size / 1000) }} </td>
+                                        <td class="p-2 ">{{ basename($file->media_type) }}</td>
+                                        <td class="p-2">
+                                            <div class="flex justify-center items-center gap-2">
+                                                <!-- Download file -->
+                                                
+                                                <!-- Delete file -->
+                                                <form action="{{ route('files.destroy', [$entry, $file]) }}"
+                                                    method="POST">
+                                                    <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                                    @csrf
+                                                    <!-- Dirtective to Override the http method -->
+                                                    @method('DELETE')
+                                                    <button
+                                                        onclick="return confirm('Are you sure you want to delete the file: {{ $file->original_filename }}?')"
+                                                        title="Delete file">
+                                                        <span
+                                                            class="text-red-600 hover:text-red-500 transition-all duration-500 cursor-pointer"><i
+                                                                class="fa-lg fa-solid fa-trash"></i></span>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+
+                            </table>
+                        </div>
+                    @endif
+
+                        <div class="flex flex-row py-2 w-full">
+                            @if ($entry->files->count() >= 5)
+                                <div class="flex flex-row text-red-600 text-sm italic p-2 ">
+                                    <span>Max files (5) reached. Delete some if you want to upload a new File.</span>
+                                </div>                
+                            @else
+                                <!-- Upload file -->
+                                <div class="flex flex-col gap-2 w-full">
+                                    <div class="flex flex-row text-sm px-2">
+                                    @if($entry->files->count() == 0)                                    
+                                        <span>No files for this entry</span>                                    
+                                    @else
+                                        <span>Max files (5). You still can upload {{5 - $entry->files->count()}} more files.</span>        
+                                    @endif
+                                    </div>
+                                    <div class="flex flex-row w-full">
+                                        <a href="{{ route('files.upload', $entry) }}"
+                                            class="w-full sm:w-1/4 p-2 rounded-sm text-white text-sm text-center bg-black hover:bg-slate-800 transition-all duration-500">
+                                            <span class="font-bold uppercase font-bold"> Upload File</span>
+                                            <span class="px-2"><i class="fa-solid fa-file-arrow-up"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+
+                </div>
+
+            </div>
 
         </div>
 

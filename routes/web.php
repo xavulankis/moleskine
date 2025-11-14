@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EntryController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\TagController;
 use App\Livewire\Categories;
 use App\Livewire\CategoriesCreate;
@@ -11,6 +12,7 @@ use App\Livewire\Entries;
 use App\Livewire\EntriesCreate;
 use App\Livewire\EntriesEdit;
 use App\Livewire\EntriesShow;
+use App\Livewire\FileUpload;
 use App\Livewire\Tags;
 use App\Livewire\TagsCreate;
 use App\Livewire\TagsEdit;
@@ -53,6 +55,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/entries/show/{entry}', EntriesShow::class)->name('entries.show');
     Route::delete('/entries/{entry}', [EntryController::class, 'destroy'])->name('entries.destroy');
     Route::get('/entries/edit/{entry}', EntriesEdit::class)->name('entries.edit');    
+
+    /* FILES */
+    Route::get('/entries/{entry}/file', FileUpload::class)->name('files.upload');
+    Route::delete('/entries/{entry}/file/{file}', [FileController::class, 'destroy'])->name('files.destroy');
 
     /* CATEGORIES */
     Route::get('/categories', Categories::class)->name('categories.index');

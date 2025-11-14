@@ -60,6 +60,15 @@ class Entry extends Model
         )->withTimestamps();
     }
 
-   
+   /**
+     * Get the Files associated.
+     */
+    public function files()
+    {
+        return $this->hasMany(
+            File::class,
+            foreignKey: 'entry_id'
+        );
+    }
 
 }
