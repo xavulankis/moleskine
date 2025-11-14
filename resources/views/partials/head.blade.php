@@ -10,6 +10,12 @@
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
+<!-- Custom JS Scripts -->
+<script src="{{ asset('js/topButtonScript.js') }}" defer></script>
+
+<!-- Custom CSS Files -->
+<link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
 <!-- Quill Editor js-->
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>

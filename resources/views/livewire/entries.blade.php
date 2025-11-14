@@ -195,76 +195,6 @@
                     @endif
 
 
-                    <!-- 2 ROW FILTER VALUE-->
-                    <div class="flex flex-col md:flex-row p-1 my-1">
-                        <!-- Value From -->
-                        <div class="flex flex-row justify-between w-full md:w-1/2 my-2 md:my-0">
-                            
-                            <div class="w-5/12 px-1">
-                                <span><i class="fa fa-eur"></i></span>
-                                <span>Value <span class="text-sm font-bold">from</span></span>                            
-                            </div>                        
-                            <div class="flex flex-row w-6/12 justify-end">                            
-                                <input type="number" class="w-full rounded-sm bg-gray-100 text-end text-green-800 cursor-pointer" placeholder="From"
-                                    wire:model.live="valueFrom">                                                                                            
-                            </div>
-                            <div class="w-1/12">
-                                @if ($initialValueFrom != $valueFrom)
-                                    <a wire:click.prevent="clearFilterValue" title="Reset Filter Value from"
-                                        class="cursor-pointer">
-                                        <span class="text-red-600 hover:text-red-400 px-1">
-                                            <i class="fa-solid fa-circle-xmark"></i>
-                                        </span>
-                                    </a>
-                                @endif
-                            </div>
-
-                        </div>
-
-                        <!-- Value To -->
-                        <div class="flex flex-row justify-between w-full md:w-1/2 my-2 md:my-0">
-                            
-                            <div class="w-5/12 px-1">
-                                <span><i class="fa fa-eur"></i></span>
-                                <span>Value <span class="text-sm font-bold">to</span></span>                            
-                            </div>                        
-                            <div class="flex flex-row w-6/12 justify-end">                            
-                                <input type="number" class="w-full rounded-sm bg-gray-100 text-end text-green-800 cursor-pointer" placeholder="From"
-                                    wire:model.live="valueTo">                                                                                            
-                            </div>
-                            <div class="w-1/12">
-                                @if ($initialValueTo != $valueTo)
-                                    <a wire:click.prevent="clearFilterValue" title="Reset Filter Value to"
-                                        class="cursor-pointer">
-                                        <span class="text-red-600 hover:text-red-400 px-1">
-                                            <i class="fa-solid fa-circle-xmark"></i>
-                                        </span>
-                                    </a>
-                                @endif
-                            </div>
-
-                        </div> 
-                
-                    </div>
-
-                    <!-- Filter Error Value -->                                       
-                    @if ($valueFrom > $valueTo)
-                        <!-- 2 ROW FILTER VALUE-->
-                        <div class="flex flex-col md:flex-row p-1 my-1">
-                            <!-- Value From -->
-                            <div class="flex flex-row justify-between w-full md:w-1/2 my-2 md:my-0">
-                                
-                                <div class="w-5/12 px-1">                                                            
-                                </div>                        
-                                <div class="flex flex-row w-6/12 justify-end rounded-sm bg-green-100 border-1 border-gray-200"> 
-                                        <span class="italic text-sm text-red-500 p-1 px-2"> Value from is bigger than Value To</span>
-                                </div>
-                                <div class="w-1/12">                                    
-                                </div>
-
-                            </div> 
-                        </div>
-                    @endif
                 
                 </div> 
                 @endif
@@ -565,7 +495,6 @@
 
             @endif
                
-            {{var_dump($entries)}}
             @if ($entries->count())
             <!-- TABLE -->
             <div class="bg-black text-white my-0">

@@ -1,0 +1,226 @@
+/* Style for the JS(topButtonScript) to the top button */
+
+html {
+    scroll-behavior: smooth;
+}
+
+#myBtn  {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 20px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: #696e78; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 5px 10px; /* Some padding */
+    border-radius: 50%;
+    font-size: 18px; /* Increase font size */
+    transition: all 0.5s ease-in-out;
+}
+  
+#myBtn:hover {
+    background-color: #000; /* Add a dark-grey background on hover */
+}
+
+/* Tooltip */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #e5e7eb;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip - takes 500ms to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #e5e7eb transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Quill Editor */
+
+.ql-container {    
+    border-radius: 0px 0px 0px 0px;
+    background-color: transparent;
+}
+
+.ql-toolbar {
+    border-radius: 0px 5px 0px 0px;
+    background-color: #f9fafb;
+}
+
+.ql-editor {
+    border-radius: 0px 0px 5px 5px;
+    background-color: #f9fafb;
+    height: 250px;
+}
+
+.ql-editor:focus {
+    outline: 2px solid rgb(34 197 94);
+}
+
+
+/* Select2 */
+
+.select2.select2-container {
+    width: 100% !important;
+  }
+  
+.select2.select2-container .select2-selection {
+    border: 1px solid #e5e7eb;
+    -webkit-border-top-right-radius: 8px;
+    -moz-border-top-right-radius: 8px;
+    border-top-right-radius: 8px;
+    -webkit-border-top-left-radius: 0px;
+    -moz-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    -moz-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    -webkit-border-bottom-right-radius: 8px;
+    -moz-border-bottom-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    height: 40px;
+    outline: none !important;
+    transition: all .15s ease-in-out;
+    padding-left: 5px;
+}
+  
+  .select2.select2-container .select2-selection .select2-selection__rendered {
+    color: #fff;
+    line-height: 32px;
+    padding-right: 33px;
+  }
+
+/*  
+  .select2.select2-container .select2-selection .select2-selection__arrow {
+    background: #f8f8f8;
+    border-left: 1px solid #ccc;
+    -webkit-border-radius: 0 3px 3px 0;
+    -moz-border-radius: 0 3px 3px 0;
+    border-radius: 0 3px 3px 0;
+    height: 32px;
+    width: 33px;
+  }
+  
+  .select2.select2-container.select2-container--open .select2-selection.select2-selection--single {
+    background: #f8f8f8;
+  }
+  
+  .select2.select2-container.select2-container--open .select2-selection.select2-selection--single .select2-selection__arrow {
+    -webkit-border-radius: 0 3px 0 0;
+    -moz-border-radius: 0 3px 0 0;
+    border-radius: 0 3px 0 0;
+  }
+ */
+
+  .select2.select2-container.select2-container--open .select2-selection.select2-selection--multiple {
+    border: 2px solid rgb(34 197 94);
+  }
+  
+  .select2.select2-container .select2-selection--multiple {
+    height: auto;
+    min-height: 40px;
+  }
+  
+  .select2.select2-container .select2-selection--multiple .select2-search--inline .select2-search__field {
+    margin-top: 0;
+    height: 32px;
+  }
+  
+  .select2.select2-container .select2-selection--multiple .select2-selection__rendered {
+    display: block;
+    padding: 0 4px;
+    line-height: 29px;
+  }
+  
+  .select2.select2-container .select2-selection--multiple .select2-selection__choice {
+    background-color: rgb(34 197 94);
+    border: 1px solid #ccc;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    margin: 4px 4px 4px 0;
+    padding: 8px 10px 5px 30px;
+    height: 40px;
+    line-height: 24px;
+    font-size: 0.9rem;
+    position: relative;
+  }
+  
+  .select2.select2-container .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 22px;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .select2.select2-container .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove:hover {
+    color: red;
+  }
+  
+  .select2-container .select2-dropdown {
+    background: transparent;
+    border: none;
+    margin-top: -5px;
+  }
+  
+  .select2-container .select2-dropdown .select2-search {
+    padding: 0;
+  }
+  
+  .select2-container .select2-dropdown .select2-search input {
+    outline: none !important;
+    border: 1px solid red !important;
+    border-bottom: none !important;
+    padding: 4px 6px !important;
+  }
+  
+  .select2-container .select2-dropdown .select2-results {
+    padding: 0;
+  }
+  
+  .select2-container .select2-dropdown .select2-results ul {
+    background: #f9fafb;
+    border: 1px solid rgb(34 197 94);
+  }
+  
+  .select2-container .select2-dropdown .select2-results ul .select2-results__option--highlighted[aria-selected] {
+    background-color: rgb(34 197 94);
+  } 

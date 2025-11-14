@@ -176,12 +176,7 @@ class Entries extends Component
         $this->dateFrom = date('Y-m-d', strtotime(Entry::where('user_id', Auth::id())->min('entries.date')));
         $this->initialDateFrom = date('Y-m-d', strtotime(Entry::where('user_id', Auth::id())->min('entries.date')));
         $this->dateTo = date('Y-m-d', strtotime(Entry::where('user_id', Auth::id())->max('entries.date')));
-        $this->initialDateTo = date('Y-m-d', strtotime(Entry::where('user_id', Auth::id())->max('entries.date')));
-
-        $this->valueFrom = Entry::where('user_id', Auth::id())->min('value');
-        $this->initialValueFrom = Entry::where('user_id', Auth::id())->min('value');
-        $this->valueTo = Entry::where('user_id', Auth::id())->max('value');
-        $this->initialValueTo = Entry::where('user_id', Auth::id())->max('value');
+        $this->initialDateTo = date('Y-m-d', strtotime(Entry::where('user_id', Auth::id())->max('entries.date')));        
     }   
 
     public function activateSmallView(bool $activate)
@@ -241,19 +236,7 @@ class Entries extends Component
         $this->dateFrom = date('Y-m-d', strtotime(Entry::where('user_id', Auth::id())->min('entries.date')));
         $this->dateTo = date('Y-m-d', strtotime(Entry::where('user_id', Auth::id())->max('entries.date')));
         unset($this->criteria['date']);
-    }    
-
-    public function clearFilterValue()
-    {
-        $this->clearFilterValueUser();
-    }
-
-    public function clearFilterValueUser()
-    {
-        $this->valueFrom = Entry::where('user_id', Auth::id())->min('value');
-        $this->valueTo = Entry::where('user_id', Auth::id())->max('value');
-        unset($this->criteria['value']);
-    }     
+    }             
 
     public function clearFilterCategory()
     {
@@ -348,11 +331,6 @@ class Entries extends Component
             else {
                 //dd('errorcito');
             }
-        }
-
-        // interval value filter   
-        if ($this->valueFrom <= $this->valueTo) {
-            $data = $data->whereBetween('value', [$this->valueFrom, $this->valueTo]);
         }       
 
         // category filter
