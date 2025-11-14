@@ -16,6 +16,9 @@
 <!-- Custom CSS Files -->
 <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
+<!-- Clipboard js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+
 <!-- Quill Editor js-->
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>

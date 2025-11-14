@@ -576,13 +576,31 @@
                                         <td class="p-2">
                                             <div class="flex justify-center items-center gap-2">
                                                 <!-- Show -->
-                                                S
+                                                <a href="{{ route('entries.show', $entry) }}" title="Show">
+                                                    <i
+                                                        class="fa-solid fa-circle-info text-orange-600 hover:text-orange-700 transition duration-1000 ease-in-out"></i>
+                                                </a>
                                                 <!-- Upload File -->
                                                 U
                                                 <!-- Edit -->
-                                                E
+                                                <a href="{{ route('entries.edit', $entry) }}" title="Edit">                                                    
+                                                    <i
+                                                        class="fa-solid fa-pen-to-square text-green-600 hover:text-green-700 transition duration-1000 ease-in-out"></i>
+                                                </a>
                                                 <!-- Delete -->
-                                                D                                              
+                                                <form action="{{ route('entries.destroy', $entry) }}" method="POST">
+                                                    <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                                    @csrf
+                                                    <!-- Dirtective to Override the http method -->
+                                                    @method('DELETE')
+                                                    <button
+                                                        onclick="return confirm('Are you sure you want to delete the entry: {{ $entry->title }}?')"
+                                                        title="Delete this entry"
+                                                        class="cursor-pointer">                                                        
+                                                        <i
+                                                            class="fa-solid fa-trash text-red-600 hover:text-red-700 transition-all duration-500 cursor-pointer"></i>
+                                                    </button>
+                                                </form>                                              
                                             </div>
                                         </td>
                                     </tr>

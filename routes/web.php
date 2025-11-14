@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EntryController;
 use App\Http\Controllers\TagController;
 use App\Livewire\Categories;
 use App\Livewire\CategoriesCreate;
@@ -8,6 +9,8 @@ use App\Livewire\CategoriesEdit;
 use App\Livewire\CategoriesShow;
 use App\Livewire\Entries;
 use App\Livewire\EntriesCreate;
+use App\Livewire\EntriesEdit;
+use App\Livewire\EntriesShow;
 use App\Livewire\Tags;
 use App\Livewire\TagsCreate;
 use App\Livewire\TagsEdit;
@@ -47,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
     /* ENTRIES */
     Route::get('/entries', Entries::class)->name('entries.index');
     Route::get('/entries/create', EntriesCreate::class)->name('entries.create');
+    Route::get('/entries/show/{entry}', EntriesShow::class)->name('entries.show');
+    Route::delete('/entries/{entry}', [EntryController::class, 'destroy'])->name('entries.destroy');
+    Route::get('/entries/edit/{entry}', EntriesEdit::class)->name('entries.edit');    
 
     /* CATEGORIES */
     Route::get('/categories', Categories::class)->name('categories.index');
