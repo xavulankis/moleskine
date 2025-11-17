@@ -236,17 +236,17 @@
                             <input type="radio" wire:model.live="searchType" value="entries.id" class="cursor-pointer">
                         </div>
                         <div class="flex flex-row p-2 ml-2 items-center gap-2">
-                            <i class="fa-solid fa-text-width"></i>
+                            <i class="fa-solid fa-pen"></i>
                             <span class="capitalize">title</span>    
                             <input type="radio" wire:model.live="searchType" value="title" class="cursor-pointer">
                         </div>
                         <div class="flex flex-row p-2 items-center gap-2">
-                            <i class="fa-solid fa-industry"></i>
+                            <i class="fa-solid fa-location-dot"></i>
                             <span class="capitalize">place</span>    
                             <input type="radio" wire:model.live="searchType" value="place" class="cursor-pointer">
                         </div>
                         <div class="flex flex-row p-2 items-center gap-2">
-                            <i class="fa-solid fa-piggy-bank"></i>
+                            <i class="fa-solid fa-circle-user"></i>
                             <span class="capitalize">autor</span>    
                             <input type="radio" wire:model.live="searchType" value="autor" class="cursor-pointer">
                         </div>         

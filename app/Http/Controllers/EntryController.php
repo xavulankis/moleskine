@@ -59,20 +59,20 @@ class EntryController extends Controller
         {
             if ($request->entryType == 'archive')
             {
-                $excelFileName = 'ARCHIVE_Kakebo_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Archive_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
             }
             else {
-                $excelFileName = 'Kakebo_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
             }            
         }
         else {
 
             if ($request->entryType == 'archive')
             {
-                $excelFileName = 'ARCHIVE_Kakebo_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Archive_'. date('Y-m-d',time()) . '_Total('. count($listIds) .').xlsx';
             }
             else {
-                $excelFileName = 'Kakebo_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_'. date('Y-m-d',time()) . '_Total('. count($listIds) .').xlsx';
             }
         }
         
@@ -102,20 +102,20 @@ class EntryController extends Controller
         {
             if ($request->entryType == 'archive')
             {
-                $excelFileName = 'ARCHIVE_Kakebo_Bulk_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Archive_Bulk_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
             }
             else {
-                $excelFileName = 'Kakebo_Bulk_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Total('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Bulk_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
             }            
         }
         else {
 
             if ($request->entryType == 'archive')
             {
-                $excelFileName = 'ARCHIVE_Kakebo_Bulk_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Archive_Bulk_'. date('Y-m-d',time()) . '_Total('. count($listIds) .').xlsx';
             }
             else {
-                $excelFileName = 'Kakebo_Bulk_'. date('Y-m-d',time()) . '_User_' . Auth::user()->name . '_TotalEntries('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Bulk_'. date('Y-m-d',time()) . '_Total('. count($listIds) .').xlsx';
             }
         }
 

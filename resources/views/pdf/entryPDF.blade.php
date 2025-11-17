@@ -22,11 +22,7 @@
                 <tr>
                     <td class="tdInfo">Id</td>
                     <td>{{ $id }}</td>
-                </tr>
-                <tr>
-                    <td class="tdInfo">User</td>
-                    <td>{{ $user_name }}</td>
-                </tr>
+                </tr>                
                 <tr>
                     <td class="tdInfo">Date</td>
                     <td>{{ $date }}</td>
@@ -35,26 +31,6 @@
                     <td class="tdInfo">Title</td>
                     <td>{{ $title }}</td>
                 </tr>
-                <tr>
-                    <td class="tdInfo">Value</td>
-                    <td>{{ $value }}</td>
-                </tr>
-                <tr>
-                    <td class="tdInfo">Description</td>
-                    <td>{{ $description }}</td>
-                </tr>
-                <tr>
-                    <td class="tdInfo">Url</td>
-                    <td>{{ $url }}</td>
-                </tr>
-                <tr>
-                    <td class="tdInfo">Place</td>
-                    <td>{{ $place }}</td>
-                </tr>
-                <tr>
-                    <td class="tdInfo">Autor</td>
-                    <td>{{ $autor }}</td>
-                </tr>    
                 <tr>
                     <td class="tdInfo">Category</td>
                     <td><span class="badge_category">{{ $category_name }}</span></td>
@@ -66,7 +42,62 @@
                             <span class="badge_tag">{{ $tag['name'] }}</span>
                         @endforeach
                     </td>
-                </tr> 
+                </tr>
+                @if (isset($description))
+                    <tr>
+                        <td class="tdInfo">Description</td>
+                        <td>{!! $description !!}</td>
+                    </tr>
+                @else
+                    <tr>
+                        <td class="tdInfo">Description</td>
+                        <td>-</td>
+                    </tr>
+                @endif
+                @if (isset($url))
+                    <tr>
+                        <td class="tdInfo">Url</td>
+                        <td>{!! $url !!}</td>
+                    </tr>
+                @else
+                    <tr>
+                        <td class="tdInfo">Url</td>
+                        <td>-</td>
+                    </tr>
+                @endif                
+                @if (isset($place))
+                    <tr>
+                        <td class="tdInfo">Place</td>
+                        <td>{!! $place !!}</td>
+                    </tr>
+                @else
+                    <tr>
+                        <td class="tdInfo">Place</td>
+                        <td>-</td>
+                    </tr>
+                @endif
+                @if (isset($autor))
+                    <tr>
+                        <td class="tdInfo">Autor</td>
+                        <td>{!! $autor !!}</td>
+                    </tr>
+                @else
+                    <tr>
+                        <td class="tdInfo">Autor</td>
+                        <td>-</td>
+                    </tr>
+                @endif
+                @if (isset($value))
+                    <tr>
+                        <td class="tdInfo">Value</td>
+                        <td>{!! $value !!}</td>
+                    </tr>
+                @else
+                    <tr>
+                        <td class="tdInfo">Value</td>
+                        <td>-</td>
+                    </tr>
+                @endif                
                 @if (isset($info))
                     <tr>
                         <td class="tdInfo">Info</td>

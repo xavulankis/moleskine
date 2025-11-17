@@ -94,8 +94,9 @@ class EntryExport implements FromCollection, WithMapping, WithHeadings, WithStyl
         $files = $entry->files->count();    
         //dd($entry->files);        
        
+        $sanitizedInfo = strip_tags($entry->info);
 
-        return [$entry->id, $entry->user->name, $entry->date, $entry->title, $entry->description, $entry->url, $entry->place, $entry->autor, $entry->value, $entry->category->name, $tags, $files, $entry->info, date_format($entry->created_at, 'd-m-Y'), date_format($entry->updated_at, 'd-m-Y')];
+        return [$entry->id, $entry->date, $entry->title, $entry->description, $entry->url, $entry->place, $entry->autor, $entry->value, $entry->category->name, $tags, $files, $sanitizedInfo, date_format($entry->created_at, 'd-m-Y'), date_format($entry->updated_at, 'd-m-Y')];
     }
 
     /**
@@ -105,7 +106,7 @@ class EntryExport implements FromCollection, WithMapping, WithHeadings, WithStyl
      */
     public function headings(): array
     {        
-        return ['ID', 'USER', 'DATE', 'TITLE', 'DESCRIPTION', 'URL', 'PLACE', 'AUTOR', 'VALUE', 'CATEGORY', 'TAGS', 'FILES', 'INFO', 'CREATED', 'UPDATED'];
+        return ['ID', 'DATE', 'TITLE', 'DESCRIPTION', 'URL', 'PLACE', 'AUTOR', 'VALUE', 'CATEGORY', 'TAGS', 'FILES', 'INFO', 'CREATED', 'UPDATED'];
     }
 
     /**
@@ -125,19 +126,27 @@ class EntryExport implements FromCollection, WithMapping, WithHeadings, WithStyl
                 $event->sheet->getRowDimension('1')->setRowHeight(50);
                 $event->sheet->getDefaultColumnDimension()->setWidth(20);
 
-                // Except for Title and Files
+                // Exceptions
                 $event->sheet->getColumnDimension('A')->setWidth(10);
-                $event->sheet->getColumnDimension('C')->setWidth(15);
+                $event->sheet->getColumnDimension('B')->setWidth(10);
+                $event->sheet->getColumnDimension('C')->setWidth(40);
+                $event->sheet->getColumnDimension('H')->setWidth(10);
+                $event->sheet->getColumnDimension('K')->setWidth(10);
+                $event->sheet->getColumnDimension('L')->setWidth(40);
+                $event->sheet->getColumnDimension('M')->setWidth(10);
                 $event->sheet->getColumnDimension('N')->setWidth(10);
+                // $event->sheet->getColumnDimension('A')->setWidth(10);
+                // $event->sheet->getColumnDimension('C')->setWidth(15);
+                // $event->sheet->getColumnDimension('N')->setWidth(10);
 
-                $event->sheet->getColumnDimension('D')->setWidth(50);
-                $event->sheet->getColumnDimension('J')->setWidth(15);
-                $event->sheet->getColumnDimension('K')->setWidth(15);
-                $event->sheet->getColumnDimension('L')->setWidth(60);
-                $event->sheet->getColumnDimension('M')->setWidth(15);
+                // $event->sheet->getColumnDimension('D')->setWidth(50);
+                // $event->sheet->getColumnDimension('J')->setWidth(15);
+                
+                // $event->sheet->getColumnDimension('L')->setWidth(10);
+                // $event->sheet->getColumnDimension('M')->setWidth(15);
 
-                $event->sheet->getColumnDimension('O')->setWidth(15);
-                $event->sheet->getColumnDimension('P')->setWidth(15);
+                // $event->sheet->getColumnDimension('O')->setWidth(15);
+                // $event->sheet->getColumnDimension('P')->setWidth(15);
 
                 //$event->sheet->getColumnDimension('J')->setVisible(false);
                 //$event->sheet->getColumnDimension('H')->setVisible(false);
@@ -168,8 +177,8 @@ class EntryExport implements FromCollection, WithMapping, WithHeadings, WithStyl
                     //$cellDistance   = $event->sheet->getCell('K' . $row)->getValue();
                     //$cellUrls       = $event->sheet->getCell('L' . $row)->getValue();
                     
-                    $cellType       = $event->sheet->getCell('E' . $row)->getValue();
-                    $cellValue      = $event->sheet->getCell('F' . $row)->getValue();
+                    //$cellType       = $event->sheet->getCell('E' . $row)->getValue();
+                    //$cellValue      = $event->sheet->getCell('F' . $row)->getValue();
                     // $cellInfo       = $event->sheet->getCell('M' . $row)->getValue();
                     // $cellFiles      = $event->sheet->getCell('N' . $row)->getValue();
 
@@ -220,35 +229,35 @@ class EntryExport implements FromCollection, WithMapping, WithHeadings, WithStyl
                     //         ->setARGB('e5e7eb');
                     // }
                     // VALUE - 1 red pending, 0 green done
-                    if ($cellValue < 0) {
-                        $event->sheet
-                            ->getStyle('F' . $row)
-                            ->getFont()
-                            ->getColor()
-                            ->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_RED);
-                    } else {
-                        $event->sheet
-                            ->getStyle('F' . $row)
-                            ->getFont()
-                            ->getColor()
-                            ->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_GREEN);
-                    }
-                    // TYPE - 1 red pending, 0 green done
-                    if ($cellType == 1) {
-                        $event->sheet
-                            ->getStyle('E' . $row)
-                            ->getFont()
-                            ->getColor()
-                            ->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_GREEN);
-                    } else {
-                        $event->sheet
-                            ->getStyle('E' . $row)
-                            ->getFont()
-                            ->getColor()
-                            ->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_RED);
+                    // if ($cellValue < 0) {
+                    //     $event->sheet
+                    //         ->getStyle('F' . $row)
+                    //         ->getFont()
+                    //         ->getColor()
+                    //         ->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_RED);
+                    // } else {
+                    //     $event->sheet
+                    //         ->getStyle('F' . $row)
+                    //         ->getFont()
+                    //         ->getColor()
+                    //         ->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_GREEN);
+                    // }
+                    // // TYPE - 1 red pending, 0 green done
+                    // if ($cellType == 1) {
+                    //     $event->sheet
+                    //         ->getStyle('E' . $row)
+                    //         ->getFont()
+                    //         ->getColor()
+                    //         ->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_GREEN);
+                    // } else {
+                    //     $event->sheet
+                    //         ->getStyle('E' . $row)
+                    //         ->getFont()
+                    //         ->getColor()
+                    //         ->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_RED);
 
-                        $event->sheet->setCellValue('E' . $row, '0');
-                    }
+                    //     $event->sheet->setCellValue('E' . $row, '0');
+                    // }
                     // INFO
                     // if ($cellInfo == '') {
                     //     $event->sheet
