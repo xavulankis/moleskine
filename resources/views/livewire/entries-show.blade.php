@@ -25,26 +25,26 @@
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 p-1 text-sm text-slate-600">
         <a href="/entries" class="hover:text-black">Entries</a> /
-        <a href="/entries/show/{{ $entry->id }}" class="font-bold text-black border-b-2 border-b-orange-600">Info</a>
+        <a href="/entries/show/{{ $entry->id }}" class="font-bold text-black {{ $underlineMenu }}">Info</a>
     </div>
 
     <div class="bg-zinc-200 overflow-hidden shadow-sm md:rounded-t-sm">
                 
         <!-- Header -->
-        <div class="flex flex-row text-white font-bold uppercase p-2 bg-amber-600">
+        <div class="flex flex-row text-white font-bold uppercase p-2 {{ $bgMenuColor }}">
             <span>information</span>
         </div>
         <!-- Actions -->
-        <div class="flex flex-row w-11/12 mx-auto justify-end items-center p-2 gap-2 border-b-1 border-b-zinc-400">
+        <div class="flex flex-row w-11/12 mx-auto justify-end items-center p-2 gap-2 border-b-1 border-b-slate-800">                
                                             
                 <!-- PDF -->
                 <a href="{{ route('entries_pdf.generate', $entry) }}" title="Download as PDF">
                     <i
-                        class="fa-solid fa-file-pdf hover:text-amber-600 transition-all duration-500"></i>
+                        class="fa-solid fa-file-pdf {{ $iconPDF }} hover:text-slate-800 transition-all duration-500"></i>
                 </a>
                 <!-- Edit -->
                 <a href="{{ route('entries.edit', $entry) }}" title="Edit">
-                    <i class="fa-solid fa-pencil hover:text-green-600 transition-all duration-500"></i>
+                    <i class="fa-solid fa-pencil {{ $iconEdit }} hover:text-slate-800 transition-all duration-500"></i>
                 </a>
                 <!-- Delete -->
                 <form action="{{ route('entries.destroy', $entry) }}" method="POST">
@@ -56,15 +56,17 @@
                         onclick="return confirm('Are you sure you want to delete this entry')"
                         title="Delete">
                         <i
-                            class="fa-solid fa-trash hover:text-red-600 transition-all duration-500 cursor-pointer"></i>
+                            class="fa-solid fa-trash {{ $iconDelete }} hover:text-slate-800 transition-all duration-500 cursor-pointer"></i>
                     </button>
-                </form>
+                </form>                
+                <!-- Actions -->
+                <span class="{{$actionsBadge}}">actions</span>
             
         </div>
 
 
         <!-- INFO -->
-        <div class="mx-auto w-11/12 mt-4 pb-4 rounded-sm flex flex-col gap-2">
+        <div class="mx-auto w-11/12 mt-4 pb-4 flex flex-col gap-2 border-b-1 border-b-slate-800">
 
             <!-- Id -->
             <div class="flex flex-col md:flex-row gap-2">
@@ -193,6 +195,7 @@
             </div> 
 
             <!-- Description -->
+            <!-- Description -->
             <div class="flex flex-col md:flex-row gap-2">
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
@@ -202,6 +205,8 @@
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">description</span>
                     </div>
+                    
+                    @if (isset($entry->description))
                     <div class="flex flex-row justify-start items-center p-2 md:hidden">
                         <span x-data="{ show: false }" class="relative" data-tooltip="Copy Description">
                             <button class="btn" data-clipboard-target="#description" x-on:click="show = true"
@@ -213,16 +218,21 @@
                             </span>
                         </span>
                     </div>
+                    @endif
+                    
                 </div>
                 
                 <div class="flex flex-row justify-between items-center w-full">
 
-                    <div class="flex flex-row p-2 bg-zinc-100 w-full">
-                        <span 
-                        id="description">
-                        {{ $entry->description }}</span>
+                    <div class="flex flex-row p-2 bg-zinc-100 w-full">                        
+                        @if (isset($entry->description))  
+                            <span id="description"> {{ $entry->description}}</span>
+                        @else 
+                            <span>-</span>
+                        @endif
                     </div>
 
+                    @if (isset($entry->description))
                     <div class="flex flex-row justify-start items-center p-2 max-sm:hidden">
                         <span x-data="{ show: false }" class="relative" data-tooltip="Copy Description">
                             <button class="btn cursor-pointer" data-clipboard-target="#description" x-on:click="show = true"
@@ -234,6 +244,7 @@
                             </span>
                         </span>
                     </div>
+                    @endif
 
                 </div>
 
@@ -480,7 +491,7 @@
                                     </div>
                                     <div class="flex flex-row w-full">
                                         <a href="{{ route('files.upload', $entry) }}"
-                                            class="w-full sm:w-1/4 p-2 rounded-sm text-white text-sm text-center bg-black hover:bg-slate-800 transition-all duration-500">
+                                            class="w-full sm:w-1/4 p-2 rounded-sm text-white text-sm text-center {{ $bgMenuColor }} hover:bg-violet-800 transition-all duration-500">
                                             <span class="font-bold uppercase font-bold"> Upload File</span>
                                             <span class="px-2"><i class="fa-solid fa-file-arrow-up"></i></span>
                                         </a>
@@ -499,7 +510,7 @@
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-angle-up"></i></button>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-center items-center p-2 mt-4 bg-amber-600 rounded-sm">
+        <div class="flex flex-row justify-center items-center p-2 mt-4 {{ $bgMenuColor }} rounded-sm">
             <span class="font-bold text-xs text-white">xavulankis 2025</span>
         </div>        
 

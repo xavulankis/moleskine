@@ -21,6 +21,9 @@ class ArchiveShow extends Component
         $entry = $data->where('id', '=', $this->entryID)->first();
 
         return view('livewire.archive-show', [
+            // Styles            
+            'bgMenuColor'           => 'bg-red-800',            
+            // Data
             'archive' => $entry
         ]);
     }    

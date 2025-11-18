@@ -120,6 +120,10 @@ class EntriesEdit extends Component
         $tags           = Tag::all()->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
         
         return view('livewire.entries-edit', [
+            // Styles            
+            'bgMenuColor'       => 'bg-slate-800',
+            'underlineMenu'     => 'border-b-2 border-b-yellow-400',
+            // Data
             'categories'        => $categories,
             'tags'              => $tags,
         ]);

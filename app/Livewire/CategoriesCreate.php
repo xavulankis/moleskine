@@ -66,6 +66,10 @@ class CategoriesCreate extends Component
 
     public function render()
     {
-        return view('livewire.categories-create');
+        return view('livewire.categories-create',[
+            // Styles            
+            'bgMenuColor'           => 'bg-indigo-800',
+            'underlineMenu'         => 'border-b-2 border-b-amber-600',
+        ]);
     }
 }

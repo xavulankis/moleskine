@@ -9,7 +9,7 @@
     <div class="bg-zinc-200 overflow-hidden shadow-sm md:rounded-t-sm">
 
         <!-- Header -->
-        <div class="flex flex-row justify-between items-center p-2 bg-blue-600">
+        <div class="flex flex-row justify-between items-center p-2 {{ $bgMenuColor }}">
             
             <span class="text-white font-bold uppercase">New Category </span>
             
@@ -70,14 +70,14 @@
             <!-- Save -->
             <div class="flex flex-col md:items-start">
                 <button wire:click.prevent="save" 
-                    class="w-full md:w-1/4 bg-blue-600 hover:bg-blue-800 text-white font-semibold uppercase p-2 rounded-md shadow-none transition duration-1000 ease-in-out cursor-pointer {{ $inputs->count() > 5 ? 'cursor-not-allowed' : '' }}" {{ $inputs->count() > 5 ? 'disabled' : '' }}">
+                    class="w-full md:w-1/4 {{ $bgMenuColor }} hover:bg-green-800 text-white font-semibold uppercase p-2 rounded-md shadow-none transition duration-1000 ease-in-out cursor-pointer {{ $inputs->count() > 5 ? 'cursor-not-allowed' : '' }}" {{ $inputs->count() > 5 ? 'disabled' : '' }}">
                     Save
                 </button>
             </div>
         </div>
         
         <!-- Footer -->
-        <div class="flex flex-row justify-center items-center p-2 mt-4 bg-blue-600 rounded-b-sm">
+        <div class="flex flex-row justify-center items-center p-2 mt-4 {{ $bgMenuColor }} rounded-b-sm">
             <span class="font-bold text-xs text-white">xavulankis 2025</span>
         </div>        
 

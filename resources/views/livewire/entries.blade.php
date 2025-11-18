@@ -26,12 +26,12 @@
     <div class="flex flex-row justify-between items-center gap-2 p-2 font-bold uppercase bg-black text-white rounded-sm">
         
         <div>
-            <a href="/entries" class="border-b-2 border-b-yellow-400">Entries</a> 
+            <a href="/entries" class="{{ $underlineMenu}}">Entries</a> 
         </div>
 
         <div>
             <a href="{{ route('entries.create') }}"
-                class="capitalize text-white text-sm rounded-sm p-1 bg-blue-600 text-black hover:text-white transition duration-1000 ease-in-out"
+                class="capitalize {{ $newText }} rounded-sm p-1 {{ $bgNewColor }} hover:text-slate-600 transition duration-1000 ease-in-out"
                 title="Create New Entry">new entry</a>
         </div>
     </div>
@@ -39,7 +39,7 @@
     <div class="overflow-hidden py-2 bg-zinc-200">
 
             <!-- FILTERS-->
-            <div class="flex flex-col bg-green-800 mx-auto">
+            <div class="flex flex-col {{ $bgFilterColor }} mx-auto">
                 
                 <div class="flex flex-row justify-between items-center w-full text-white">
                     <span class="capitalize text-lg px-2">
@@ -63,44 +63,15 @@
                 <!-- Filters Options -->    
                 <div class="flex flex-col bg-zinc-200 opacity-95 py-2">
 
-                   
- 
-
                     <!-- 2 ROW FILTER -->
                     <div class="flex flex-col md:flex-row p-1 my-1">
-                        <!-- TAGS -->
-                        <div class="flex flex-row justify-between w-full md:w-1/2 my-2 md:my-0">
-                        
-                            <div class="w-5/12 px-1">
-                                <span><i class="fa fa-tags"></i></span>
-                                <span>Tags <span
-                                    class="text-xs">({{ count($tags) }})</span></span>                            
-                            </div>                        
-                            <div class="flex flex-row w-6/12 justify-end ml-1">                            
-                                <select wire:model.live="selectedTags" class="w-full rounded-sm bg-gray-100 text-end text-green-800 cursor-pointer px-4" name="selectedTags" id="selectedTags" multiple>
-                                    <option value="0">All</option>
-                                    @foreach ($tags as $tag)
-                                        <option value="{{ $tag['id'] }}">{{ $tag['name'] }}</option>
-                                    @endforeach
-                                </select>                                                        
-                            </div>
-                            <div class="w-1/12">
-                                @if ($selectedTags != [])
-                                    <a wire:click="clearFilterTag" title="Reset Filter Tags" class="cursor-pointer">
-                                        <span class="text-red-600 hover:text-red-400 px-2"><i
-                                                class="fa-solid fa-circle-xmark"></i></span>
-                                    </a>
-                                @endif
-                            </div>
-
-                        </div>
 
                         <!-- Category -->
                         <div class="flex flex-row justify-between w-full md:w-1/2 my-2 md:my-0">
                                 
                             <div class="w-5/12 px-1">
-                                <span><i class="fa fa-tag"></i></span>
-                                <span>Category <span
+                                <span><i class="fa fa-layer-group"></i></span>
+                                <span class="{{ $filterCategory }}">Category <span
                                 class="text-xs">({{ count($categories) }})</span></span>                            
                             </div>                        
                             <div class="flex flex-row w-6/12 justify-end">                            
@@ -115,13 +86,40 @@
                             <div class="w-1/12">
                             @if ($cat > 0)
                                 <a wire:click.prevent="clearFilterCategory" title="Reset Filter Category" class="cursor-pointer">
-                                    <span class="text-red-600 hover:text-red-400 px-1"><i
+                                    <span class="{{ $iconClose }} px-1"><i
                                             class="fa-solid fa-circle-xmark"></i></span>
                                 </a>
                             @endif
                             </div>
 
-                        </div>                
+                        </div> 
+                        
+                        <!-- TAGS -->
+                        <div class="flex flex-row justify-between w-full md:w-1/2 my-2 md:my-0">
+                        
+                            <div class="w-5/12 px-1">
+                                <span><i class="fa fa-tags"></i></span>
+                                <span class="{{ $filterTag }}">Tags <span
+                                    class="text-xs">({{ count($tags) }})</span></span>                            
+                            </div>                        
+                            <div class="flex flex-row w-6/12 justify-end ml-1">                            
+                                <select wire:model.live="selectedTags" class="w-full rounded-sm bg-gray-100 text-end text-green-800 cursor-pointer px-4" name="selectedTags" id="selectedTags" multiple>
+                                    <option value="0">All</option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag['id'] }}">{{ $tag['name'] }}</option>
+                                    @endforeach
+                                </select>                                                        
+                            </div>
+                            <div class="w-1/12">
+                                @if ($selectedTags != [])
+                                    <a wire:click="clearFilterTag" title="Reset Filter Tags" class="cursor-pointer">
+                                        <span class="{{ $iconClose }} px-2"><i
+                                                class="fa-solid fa-circle-xmark"></i></span>
+                                    </a>
+                                @endif
+                            </div>
+
+                        </div>
                 
                     </div>
 
@@ -132,7 +130,7 @@
                             
                             <div class="w-5/12 px-1">
                                 <span><i class="fa fa-calendar"></i></span>
-                                <span>Date <span class="text-sm font-bold">from</span></span>                            
+                                <span class="{{ $filterDate }}">Date <span class="text-sm font-bold">from</span></span>                            
                             </div>                        
                             <div class="flex flex-row w-6/12 justify-end">                            
                                 <input type="date" class="w-full rounded-sm bg-gray-100 text-end text-green-800 cursor-pointer" placeholder="From"
@@ -141,7 +139,7 @@
                             <div class="w-1/12">
                                 @if ($initialDateFrom != $dateFrom)
                                     <a wire:click.prevent="clearFilterDate" title="Reset Filter Date from" class="cursor-pointer">
-                                        <span class="text-red-600 hover:text-red-400 px-1">
+                                        <span class="{{ $iconClose }} px-1">
                                             <i class="fa-solid fa-circle-xmark"></i>
                                         </span>
                                     </a>
@@ -155,7 +153,7 @@
                             
                             <div class="w-5/12 px-1">
                                 <span><i class="fa fa-calendar"></i></span>
-                                <span>Date <span class="text-sm font-bold">to</span></span>                            
+                                <span class="{{ $filterDate }}">Date <span class="text-sm font-bold">to</span></span>                            
                             </div>                        
                             <div class="flex flex-row w-6/12 justify-end">                            
                                 <input type="date" class="w-full rounded-sm bg-gray-100 text-end text-green-800 cursor-pointer" placeholder="From"
@@ -164,7 +162,7 @@
                             <div class="w-1/12">
                                 @if ($initialDateTo != $dateTo)
                                     <a wire:click.prevent="clearFilterDate" title="Reset Filter Date to" class="cursor-pointer">
-                                        <span class="text-red-600 hover:text-red-400 px-1">
+                                        <span class="{{ $iconClose }} px-1">
                                             <i class="fa-solid fa-circle-xmark"></i>
                                         </span>
                                     </a>
@@ -184,8 +182,8 @@
                                 
                                 <div class="w-5/12 px-1">                                                            
                                 </div>                        
-                                <div class="flex flex-row w-6/12 justify-end rounded-sm bg-green-100 border-1 border-gray-200"> 
-                                        <span class="italic text-sm text-red-500 p-1 px-2"> Date from is bigger than Date To</span>
+                                <div class="flex flex-row w-6/12 justify-end rounded-sm bg-slate-800 border-1 border-gray-200"> 
+                                        <span class="{{ $textError }} p-1 px-2"> Date from is bigger than Date To</span>
                                 </div>
                                 <div class="w-1/12">                                    
                                 </div>
@@ -201,9 +199,8 @@
 
             </div>   
 
-
             <!-- SEARCH -->
-            <div class="flex flex-col bg-blue-800 mx-auto my-2 text-black">
+            <div class="flex flex-col {{ $bgSearchColor }} mx-auto my-2 text-black">
 
                 <div class="flex flex-row justify-between items-center w-full text-white">
                     <span class="capitalize text-lg px-2">
@@ -222,7 +219,6 @@
                         @endif
                     </div>
                 </div>
-
                             
 
                 @if ($showSearch % 2 != 0)
@@ -262,7 +258,7 @@
                         @if ($search != '')
                         <div class="absolute top-1 bottom-0 right-5 text-slate-700">
                             <a wire:click.prevent="clearSearch" title="Clear Search" class="cursor-pointer">
-                                <span class="text-red-600 hover:text-red-400">
+                                <span class="{{ $iconClose }} hover:text-red-400">
                                     <i class="fa-sm fa-solid fa-xmark"></i>
                                 </span>
                             </a>
@@ -282,7 +278,7 @@
             <div class="flex flex-col my-2">
                                 
                 <!-- HEADER - Filters and Search Criteria -->
-                <div class="flex flex-row justify-between items-center p-2 text-white {{(count($criteria) > 0) ? 'bg-pink-600' : 'bg-gray-400' }}">
+                <div class="flex flex-row justify-between items-center p-2 text-white {{(count($criteria) > 0) ? $bgCriteriaColorOn : $bgCriteriaColorOff }}">
                     <span class="text-lg capitalize">filters & search criteria</span>
                     <!-- Clear ALL Criteria for search and filters -->
                     @if (count($criteria) > 0)
@@ -305,13 +301,13 @@
                                 @if ($search != '')
                                     <div class="flex relative">                                
                                         <div
-                                            class="bg-blue-800 p-2 rounded-sm border-1 border-blue-600">
+                                            class="{{$bgSearchColor}} p-2 rounded-sm border-1 border-blue-600">
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                             <span class="uppercase font-bold">search</span>
                                             <span>({{ $criteria['searchType'] }})</span>
                                         </div>
                                         <a wire:click.prevent="clearSearch" title="Clear Search" class="cursor-pointer">
-                                            <span class="text-red-600 hover:text-red-500 px-2 absolute -top-2 -right-5"><i
+                                            <span class="{{ $iconClose }} px-2 absolute -top-2 -right-5"><i
                                                     class="fa-lg fa-solid fa-circle-xmark"></i></span>
                                         </a>
                                     </div>
@@ -320,13 +316,13 @@
                                 @if ($cat > 0)
                                     <div class="flex relative">                                
                                         <div
-                                            class="bg-green-800 p-2 rounded-sm border-1 border-green-600">
+                                            class="{{ $criteriaCategory }}">
                                             <i class="fa-solid fa-tag"></i>
                                             <span class="uppercase font-bold">category</span>
                                             <span>({{ $criteria['category'] }})</span>
                                         </div>
                                         <a wire:click.prevent="clearFilterCategory" title="Clear Filter Category" class="cursor-pointer">
-                                            <span class="text-red-600 hover:text-red-500 px-2 absolute -top-2 -right-5"><i
+                                            <span class="{{ $iconClose }} px-2 absolute -top-2 -right-5"><i
                                                     class="fa-lg fa-solid fa-circle-xmark"></i></span>
                                         </a>
                                     </div>
@@ -335,44 +331,29 @@
                                 @if ($initialDateTo != $dateTo || $initialDateFrom != $dateFrom)
                                     <div class="flex relative">
                                         <div
-                                            class="bg-green-800 p-2 rounded-sm border-1 border-green-600">
+                                            class="{{ $criteriaDate }}">
                                             <i class="fa-solid fa-calendar"></i>
                                             <span class="uppercase font-bold">date</span>
                                             <span class="lowercase">{{ '(' . date('d-m-Y', strtotime($dateFrom)) . ' to ' . date('d-m-Y', strtotime($dateTo)) . ')' }}</span>
                                         </div>                                
                                         <a wire:click.prevent="clearFilterDate" title="Clear Filter Date" class="cursor-pointer">
-                                            <span class="text-red-600 hover:text-black px-2 absolute -top-2 -right-5"><i
+                                            <span class="{{ $iconClose }} hover:text-black px-2 absolute -top-2 -right-5"><i
                                                     class="fa-lg fa-solid fa-circle-xmark"></i></span>
                                         </a>
                                     </div>
                                 @endif
-                                <!-- Value -->
-                                @if ($initialValueTo != $valueTo || $initialValueFrom != $valueFrom)
-                                    <div class="flex relative">
-                                        <div
-                                            class="bg-green-800 p-2 rounded-sm border-1 border-green-600">
-                                            <i class="fa-solid fa-eur"></i>
-                                            <span class="uppercase font-bold">value</span>
-                                            <span class="lowercase">{{ '(' . $valueFrom . ' to ' . $valueTo . ')' }}</span>
-                                        </div>                                
-                                        <a wire:click.prevent="clearFilterValue" title="Clear Filter Value" class="cursor-pointer">
-                                            <span class="text-red-600 hover:text-black px-2 absolute -top-2 -right-5"><i
-                                                    class="fa-lg fa-solid fa-circle-xmark"></i></span>
-                                        </a>
-                                    </div>
-                                @endif
-                                
+                                                                
                                 <!-- Tags -->
                                 @if (!in_array('0', $this->selectedTags) && count($this->selectedTags) != 0)
                                     <div class="flex relative">
                                         <div
-                                            class="bg-green-800 p-2 rounded-sm border-1 border-green-600">
+                                            class="{{ $criteriaTag }}">
                                             <i class="fa-solid fa-tags"></i>
                                             <span class="uppercase font-bold">tags</span>
                                             <span class="capitalize">{{ '(' . implode(', ', $tagNames) . ')' }}</span>
                                         </div>                                
                                         <a wire:click.prevent="clearFilterTag" title="Clear Filter Tag" class="cursor-pointer">
-                                            <span class="text-red-600 hover:text-black px-2 absolute -top-2 -right-5"><i
+                                            <span class="{{ $iconClose }} hover:text-black px-2 absolute -top-2 -right-5"><i
                                                     class="fa-lg fa-solid fa-circle-xmark"></i></span>
                                         </a>
                                     </div>
@@ -473,7 +454,7 @@
                                 <input type="hidden" id="entryType" name="entryType"
                                     value="active">                     
                                 <button
-                                    class="hover:text-amber-600 transition duration-1000 ease-in-out cursor-pointer"
+                                    class="hover:text-green-800 transition duration-1000 ease-in-out cursor-pointer"
                                     title="Export All as Excel file">
                                     <i class="text-green-600 fa-solid fa-file-export"></i>                                 
                                     <span class="text-xs font-normal px-1">export all</span>
@@ -491,17 +472,18 @@
                                 <span class="font-bold capitalize">bulk actions </span>
                                 <span>selected ({{ count($okselections) }})</span>
                             </div>
-                    
-                            <div class="flex flex-row gap-2">                            
-                                <a wire:click.prevent="bulkClear" class="cursor-pointer" title="Unselect Entries">
-                                    <i class="fa-solid fa-rotate-right text-blue-600"></i>
-                                </a>
 
+                            <div class="flex flex-row gap-2">                            
+                                <!-- Unselect -->
+                                <a wire:click.prevent="bulkClear" class="cursor-pointer" title="Unselect Entries">
+                                    <i class="fa-solid fa-rotate-right {{ $iconUnselect }}"></i>
+                                </a>
+                                <!-- Delete -->
                                 <a wire:click.prevent="bulkDelete" wire:confirm="Are you sure you want to delete this items?"
                                     class="cursor-pointer" title="Delete Selected">
-                                    <i class="fa-solid fa-trash text-red-600"></i>
+                                    <i class="fa-solid fa-trash {{ $iconDelete }}"></i>
                                 </a>
-
+                                <!-- Export Excel -->
                                 <form action="{{ route('entries.exportbulk') }}" method="POST">
                                         <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                         @csrf
@@ -512,7 +494,7 @@
                                         <input type="hidden" id="entryType" name="entryType"
                                             value="active">
                                         <button class="cursor-pointer" title="Export Selected as Excel file">
-                                            <i class="fa-solid fa-file-export text-green-600"></i>
+                                            <i class="fa-solid fa-file-export {{ $iconExcel }}"></i>
                                         </button>
                                 </form>
                             </div> 
@@ -541,27 +523,27 @@
                                 <tr class="text-left text-sm font-normal capitalize">
                                     <th></th>                                    
                                     <th wire:click="sorting('id')" scope="col"
-                                        class="p-2 hover:cursor-pointer {{ $column == 'id' ? 'text-yellow-400' : '' }}">
+                                        class="p-2 hover:cursor-pointer {{ $column == 'id' ? $tableHeaderSelected : '' }}">
                                         id {!! $sortLink !!}</th>                                    
                                     <th wire:click="sorting('date')" scope="col"
-                                        class="p-2 hover:cursor-pointer {{ $column == 'date' ? 'text-yellow-400' : '' }}">
+                                        class="p-2 hover:cursor-pointer {{ $column == 'date' ? $tableHeaderSelected : '' }}">
                                         Date {!! $sortLink !!}</th>                                    
                                     <th wire:click="sorting('title')" scope="col"
-                                        class="p-2 hover:cursor-pointer {{ $column == 'title' ? 'text-yellow-400' : '' }}">
+                                        class="p-2 hover:cursor-pointer {{ $column == 'title' ? $tableHeaderSelected : '' }}">
                                         Title {!! $sortLink !!}</th>
                                     <th wire:click="sorting('category_name')" scope="col"
-                                        class="p-2 hover:cursor-pointer {{ $column == 'category_name' ? 'text-yellow-400' : '' }}">
+                                        class="p-2 hover:cursor-pointer {{ $column == 'category_name' ? $tableHeaderSelected : '' }}">
                                         category {!! $sortLink !!}</th>
                                     <th scope="col" class="p-2 text-center">tags</th> 
                                     @if(!$smallView)
                                     <th wire:click="sorting('autor')" scope="col"
-                                        class="p-2 hover:cursor-pointer {{ $column == 'autor' ? 'text-yellow-400' : '' }}">
+                                        class="p-2 hover:cursor-pointer {{ $column == 'autor' ? $tableHeaderSelected : '' }}">
                                         Autor {!! $sortLink !!}</th>
                                     <th wire:click="sorting('place')" scope="col"
-                                        class="p-2 hover:cursor-pointer {{ $column == 'place' ? 'text-yellow-400' : '' }}">
+                                        class="p-2 hover:cursor-pointer {{ $column == 'place' ? $tableHeaderSelected : '' }}">
                                         Place {!! $sortLink !!}</th>                                    
                                     <th wire:click="sorting('value')" scope="col"
-                                        class="p-2 hover:cursor-pointer {{ $column == 'value' ? 'text-yellow-400' : '' }}">
+                                        class="p-2 hover:cursor-pointer {{ $column == 'value' ? $tableHeaderSelected : '' }}">
                                         Value <span class="text-sm">(€)</span> {!! $sortLink !!}</th>                                                                        
                                     @endif                                                                       
                                     <th scope="col" class="text-center">Files</th>
@@ -572,7 +554,7 @@
                             <tbody>
                                 @foreach ($entries as $entry)
                                     <tr
-                                        class="text-black {{$smallFont ? 'text-xs' : 'text-sm'}} leading-6 {{in_array($entry->id, $okselections) ? 'bg-green-200' : 'even:bg-zinc-100 odd:bg-zinc-50'}} transition-all duration-1000 hover:bg-yellow-200">
+                                        class="text-black {{$smallFont ? 'text-xs' : 'text-sm'}} leading-6 {{in_array($entry->id, $okselections) ? $tableSelected : 'even:bg-zinc-100 odd:bg-zinc-50'}} transition-all duration-1000 {{ $tableHighlight }}">
                                                 
                                         <td class="p-2 text-center"><input wire:model.live="selections" type="checkbox"
                                                 class="text-green-600 outline-none focus:ring-0 checked:bg-green-500"
@@ -581,13 +563,13 @@
                                                 {{ in_array($entry->id, $selections) ? 'checked' : '' }}
                                                 >
                                         </td>
-                                        <td class="p-2 pr-12 {{ $column == 'id' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ $entry->id }}</td>                                       
-                                        <td class="p-2 pr-12 {{ $column == 'date' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ date('d-m-Y', strtotime($entry->date)) }}</td>
+                                        <td class="p-2 pr-12 {{ $column == 'id' ? $tableCellSelected : '' }}">{{ $entry->id }}</td>                                       
+                                        <td class="p-2 pr-12 {{ $column == 'date' ? $tableCellSelected : '' }}">{{ date('d-m-Y', strtotime($entry->date)) }}</td>
                                         
-                                        <td class="p-2 pr-12 {{ $column == 'title' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}"> <a
+                                        <td class="p-2 pr-12 {{ $column == 'title' ? $tableCellSelected : '' }}"> <a
                                                 href="{{ route('entries.show', $entry) }}">{{ $entry->title }}</a></td>
 
-                                        <td class="p-2 pr-12 {{ $column == 'category_name' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ $entry->category_name }}</td>
+                                        <td class="p-2 pr-12 {{ $column == 'category_name' ? $tableCellSelected : '' }}">{{ $entry->category_name }}</td>
     
                                         <td class="p-2">
                                             @foreach ($entry->tags as $tags)
@@ -596,9 +578,9 @@
                                         </td>                                    
                                         
                                         @if(!$smallView)
-                                        <td class="p-2 pr-12 {{ $column == 'autor' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ !empty($entry->autor) ? $entry->autor : '-' }}</td>
-                                        <td class="p-2 pr-12 {{ $column == 'place' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ !empty($entry->place) ? $entry->place : '-' }}</td>
-                                        <td class="p-2 pr-16 {{ $column == 'value' ? 'bg-yellow-400 font-bold text-black transition-all duration-1000' : '' }}">{{ !empty($entry->value) ? $entry->value : '-' }}</td>
+                                        <td class="p-2 pr-12 {{ $column == 'autor' ? $tableCellSelected : '' }}">{{ !empty($entry->autor) ? $entry->autor : '-' }}</td>
+                                        <td class="p-2 pr-12 {{ $column == 'place' ? $tableCellSelected : '' }}">{{ !empty($entry->place) ? $entry->place : '-' }}</td>
+                                        <td class="p-2 pr-16 {{ $column == 'value' ? $tableCellSelected : '' }}">{{ !empty($entry->value) ? $entry->value : '-' }}</td>
                                         @endif   
                                         
                                         <td class="text-sm text-black p-2">
@@ -622,12 +604,12 @@
                                                 <!-- Show -->
                                                 <a href="{{ route('entries.show', $entry) }}" title="Show">
                                                     <i
-                                                        class="fa-solid fa-circle-info text-orange-600 hover:text-orange-700 transition duration-1000 ease-in-out"></i>
+                                                        class="fa-solid fa-circle-info {{ $iconShow}} hover:text-slate-800 transition duration-1000 ease-in-out"></i>
                                                 </a>
                                                 <!-- Upload File -->
                                                 <a href="{{ route('files.upload', $entry) }}" title="Upload File">
                                                     <span
-                                                        class="text-violet-600 hover:text-violet-700 transition-all duration-500 tooltip"><i
+                                                        class="{{ $iconUpload}} hover:text-slate-800 transition-all duration-500 tooltip"><i
                                                             class="fa-solid fa-file-arrow-up"></i>
                                                         <!-- <span class="tooltiptext">Upload File</span> -->
                                                     </span>
@@ -635,7 +617,7 @@
                                                 <!-- Edit -->
                                                 <a href="{{ route('entries.edit', $entry) }}" title="Edit">                                                    
                                                     <i
-                                                        class="fa-solid fa-pen-to-square text-green-600 hover:text-green-700 transition duration-1000 ease-in-out"></i>
+                                                        class="fa-solid fa-pen-to-square {{ $iconEdit}} hover:text-slate-800 transition duration-1000 ease-in-out"></i>
                                                 </a>
                                                 <!-- Delete -->
                                                 <form action="{{ route('entries.destroy', $entry) }}" method="POST">
@@ -648,7 +630,7 @@
                                                         title="Delete this entry"
                                                         class="cursor-pointer">                                                        
                                                         <i
-                                                            class="fa-solid fa-trash text-red-600 hover:text-red-700 transition-all duration-500 cursor-pointer"></i>
+                                                            class="fa-solid fa-trash {{ $iconDelete}} hover:text-slate-800 transition-all duration-500 cursor-pointer"></i>
                                                     </button>
                                                 </form>                                              
                                             </div>
@@ -667,7 +649,7 @@
                     <span>No entries found in the system.</span>
                     <a wire:click.prevent="resetAll" title="Reset">
                         <i
-                            class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-red-600 hover:text-red-400 transition duration-1000 ease-in-out"></i>
+                            class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 {{ $iconClose }} transition duration-1000 ease-in-out"></i>
                     </a>
                     </span>
                 </div>            

@@ -410,11 +410,8 @@ class Archive extends Component
         //dd($data->count());
         return view('livewire.archive', [
             // Styles
-            'underlineMenuHeader'   => 'border-b-2 border-b-slate-600',
-            'textMenuHeader'        => 'hover:text-slate-400',
-            'bgMenuColor'           => 'bg-slate-800',
-            'menuTextColor'         => 'text-slate-800',
-            'focusColor'            => 'focus:ring-slate-500 focus:border-slate-500',
+            'bgMenuColor'       => 'bg-red-800',
+            'underlineMenu'     => 'border-b-2 border-b-yellow-400',
             // Data
             'listEntriesIds'    => $this->listEntriesIds,
             'okselections'      => $this->okselections,

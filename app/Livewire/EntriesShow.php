@@ -30,7 +30,15 @@ class EntriesShow extends Component
     {                      
 
         return view('livewire.entries-show', [
-            'entry' => $this->entry
+            // Styles            
+            'bgMenuColor'       => 'bg-slate-800',
+            'underlineMenu'     => 'border-b-2 border-b-yellow-400',
+            'iconPDF'           => 'text-amber-600',
+            'iconEdit'          => 'text-teal-600',
+            'iconDelete'        => 'text-red-600',
+            'actionsBadge'      => 'uppercase font-bold text-xs text-black bg-yellow-300 rounded-sm border-1 border-black p-1',
+            // Data
+            'entry'             => $this->entry
         ]);
     }    
    

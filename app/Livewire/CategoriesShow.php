@@ -17,7 +17,11 @@ class CategoriesShow extends Component
     public function render()
     {
         return view('livewire.categories-show', [
-            'category' => $this->category
+            // Styles            
+            'bgMenuColor'   => 'bg-indigo-800',
+            'underlineMenu'         => 'border-b-2 border-b-amber-600',
+            // Data
+            'category'      => $this->category
         ]);
     }
 }

@@ -14,10 +14,10 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="pencil-square" :href="route('entries.index')" :current="request()->routeIs('entries')" wire:navigate>{{ __('Entries') }}</flux:navlist.item>
-                    <flux:navlist.item icon="archive-box" :href="route('archive.index')" :current="request()->routeIs('archive')" wire:navigate>{{ __('Archive') }}</flux:navlist.item>
-                    <flux:navlist.item icon="rectangle-group" :href="route('categories.index')" :current="request()->routeIs('categories')" wire:navigate>{{ __('Categories') }}</flux:navlist.item>
-                    <flux:navlist.item icon="tag" :href="route('tags.index')" :current="request()->routeIs('tags')" wire:navigate>{{ __('Tags') }}</flux:navlist.item>
+                    <flux:navlist.item icon="pencil-square" :href="route('entries.index')" :current="request()->routeIs('entries')" wire:navigate class="bg-black">{{ __('Entries') }}</flux:navlist.item>
+                    <flux:navlist.item icon="archive-box" :href="route('archive.index')" :current="request()->routeIs('archive')" wire:navigate class="bg-red-400">{{ __('Archive') }}</flux:navlist.item>
+                    <flux:navlist.item icon="rectangle-group" :href="route('categories.index')" :current="request()->routeIs('categories')" wire:navigate class="bg-indigo-600">{{ __('Categories') }}</flux:navlist.item>
+                    <flux:navlist.item icon="tag" :href="route('tags.index')" :current="request()->routeIs('tags')" wire:navigate class="bg-teal-600">{{ __('Tags') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

@@ -23,10 +23,10 @@
     @endif
 
     <!-- Header -->
-    <div class="flex flex-row justify-between items-center gap-2 p-2 font-bold uppercase bg-black text-white rounded-sm">
+    <div class="flex flex-row justify-between items-center gap-2 p-2 font-bold uppercase {{ $bgMenuColor }} text-white rounded-sm">
         
         <div>
-            <a href="/archive" class="border-b-2 border-b-yellow-400">Archive</a> 
+            <a href="/archive" class="{{ $underlineMenu }}">Archive</a> 
         </div>
         
     </div>
@@ -389,7 +389,7 @@
             <!-- TABLE ENTRIES HEADER AND BULK ACTIONS -->
             @if($total > 0)
 
-                <div class="flex flex-row justify-between md:items-end bg-slate-900 text-white mt-4">
+                <div class="flex flex-row justify-between md:items-end {{ $bgMenuColor }} text-white mt-4">
 
                     <!-- Entries Found -->
                     <div class="p-2">
@@ -539,7 +539,7 @@
                
             @if ($entries->count())
             <!-- TABLE -->
-            <div class="bg-black text-white my-0">
+            <div class="{{ $bgMenuColor }} text-white my-0">
                 <div class="overflow-x-auto">
                         <table class="min-w-full">
                             <!-- TABLE HEADER -->
@@ -691,7 +691,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="flex flex-row justify-center items-center p-2 mt-4 bg-black rounded-sm">
+    <div class="flex flex-row justify-center items-center p-2 mt-4 {{ $bgMenuColor }} rounded-sm">
         <span class="font-bold text-xs text-white">xavulankis 2025</span>
     </div>
 

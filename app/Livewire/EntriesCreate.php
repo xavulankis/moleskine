@@ -102,6 +102,10 @@ class EntriesCreate extends Component
         $tags           = Tag::all()->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
 
         return view('livewire.entries-create', [
+            // Styles            
+            'bgMenuColor'       => 'bg-slate-800',
+            'underlineMenu'     => 'border-b-2 border-b-yellow-400',
+            // Data
             'categories'        => $categories,
             'tags'              => $tags,
         ]);

@@ -31,8 +31,8 @@
     <div class="bg-zinc-200 overflow-hidden shadow-sm md:rounded-t-sm">        
 
         <!-- Header -->
-        <div class="flex flex-row text-white font-bold uppercase p-2 bg-amber-600">
-            <span>information</span>
+        <div class="flex flex-row text-white font-bold uppercase p-2 {{ $bgMenuColor }}">
+            <span class="text-white font-bold uppercase">Show Category</span>
         </div>
 
         <!-- Actions -->
@@ -79,7 +79,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-center items-center p-2 mt-4 bg-amber-600 rounded-sm">
+        <div class="flex flex-row justify-center items-center p-2 mt-4 {{ $bgMenuColor }} rounded-sm">
             <span class="font-bold text-xs text-white">xavulankis 2025</span>
         </div>
 

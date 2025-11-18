@@ -23,15 +23,15 @@
     @endif
 
     <!-- Header -->
-    <div class="flex flex-row justify-between items-center gap-2 p-2 font-bold uppercase bg-black text-white rounded-sm">
+    <div class="flex flex-row justify-between items-center gap-2 p-2 font-bold uppercase {{ $bgMenuColor }} text-white rounded-sm">
         
         <div>
-            <a href="/tags" class="border-b-2 border-b-yellow-400">tags</a> 
+            <a href="/tags" class="{{ $underlineMenu }}">tags</a> 
         </div>
 
         <div>
             <a href="{{route('tags.create')}}"
-                class="capitalize text-white text-sm rounded-sm p-1 bg-blue-600 text-black hover:text-white transition duration-1000 ease-in-out"
+                class="capitalize {{ $newText }} rounded-sm p-1 {{ $bgNewColor }} hover:text-slate-600 transition duration-1000 ease-in-out"
                 title="Create New Account">new</a>
         </div>
     </div>
@@ -40,7 +40,7 @@
     <div class="overflow-hidden py-2 bg-zinc-200">
 
         <!-- SEARCH -->
-        <div class="flex flex-col bg-blue-800 mx-auto my-2">
+        <div class="flex flex-col {{ $bgSearchColor }} mx-auto my-2">
 
             <div class="flex flex-row justify-between items-center w-full text-white">
                 <span class="capitalize text-lg p-2">search</span>                    
@@ -73,11 +73,11 @@
         </div>
 
         <!-- tag Info -->
-        <div class="flex flex-row justify-between md:items-end bg-slate-900 text-white mt-4">
+        <div class="flex flex-row justify-between md:items-end {{ $bgMenuColor }} text-white mt-4">
 
                 <!-- tag Found -->
                 <div class="p-2">
-                    <span class="text-lg">tags Found ({{ $total }})</span>
+                    <span class="text-lg">Tags Found ({{ $total }})</span>
                 </div>       
                 
                 <!-- Pagination -->
@@ -128,7 +128,7 @@
             
         @if ($tags->count())    
             <!-- TABLE -->
-            <div class="bg-black text-white my-0">
+            <div class="{{ $bgMenuColor }} text-white my-0">
                 <div class="overflow-x-auto">
                     
                     <table class="min-w-full ">
@@ -225,7 +225,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-center items-center p-2 mt-4 bg-black rounded-sm">
+        <div class="flex flex-row justify-center items-center p-2 mt-4 {{ $bgMenuColor }} rounded-sm">
             <span class="font-bold text-xs text-white">xavulankis 2025</span>
         </div>        
 

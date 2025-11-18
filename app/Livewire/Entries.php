@@ -47,18 +47,10 @@ class Entries extends Component
     public $dateTo = '';
     public $initialDateTo;
 
-    public $valueFrom;
-    public $initialValueFrom;
-    public $valueTo;
-    public $initialValueTo;
-
-    public $plac = 0;
-    public $aut = 0;
     public $cat = 0;
     public $tag = 0;
     public $selectedTags = [];
     public $tagNames = [];
-    public $userID = 0;
 
     // multiple batch selections
     public $selections = [];       
@@ -106,15 +98,7 @@ class Entries extends Component
         }else{
             unset($this->criteria['search']);
             unset($this->criteria['searchType']);
-        }
-
-        if($this->userID != 0)
-        {
-            $this->criteria['user'] = $this->entryService->getUserName($this->userID);
-        }else{
-            unset($this->criteria['user']);
-        }   
-        
+        }              
 
         if($this->initialDateTo != $this->dateTo || $this->initialDateFrom != $this->dateFrom )
         {
@@ -122,15 +106,7 @@ class Entries extends Component
         }
         else{
             unset($this->criteria['date']);
-        } 
-
-        if($this->initialValueTo != $this->valueTo || $this->initialValueFrom != $this->valueFrom)
-        {
-            $this->criteria['value'] = $this->valueFrom . ' to ' . $this->valueTo;
-        }
-        else{
-            unset($this->criteria['value']);
-        } 
+        }        
 
         if($this->cat != 0)
         {
@@ -138,23 +114,7 @@ class Entries extends Component
         } 
         else{
             unset($this->criteria['category']);
-        } 
-
-        if($this->plac != 0)
-        {
-            $this->criteria['place'] = $this->plac;
-        }        
-        else{
-            unset($this->criteria['place']);
-        }
-
-        if($this->aut != 0)
-        {
-            $this->criteria['autor'] = $this->aut;
-        }
-        else{
-            unset($this->criteria['autor']);
-        }        
+        }            
 
         if(!in_array('0', $this->selectedTags) && count($this->selectedTags) != 0)
         {
@@ -210,8 +170,6 @@ class Entries extends Component
     {
         $this->dateFrom = date('Y-m-d', strtotime(Entry::where('user_id', Auth::id())->min('entries.date')));
         $this->dateTo = date('Y-m-d', strtotime(Entry::where('user_id', Auth::id())->max('entries.date')));        
-        $this->valueFrom = Entry::where('user_id', Auth::id())->min('value');
-        $this->valueTo = Entry::where('user_id', Auth::id())->max('value');
         $this->cat = 0;
         $this->tag = 0;
         $this->selectedTags = [];
@@ -377,12 +335,35 @@ class Entries extends Component
 
         //dd($data->count());
         return view('livewire.entries', [
-            // Styles
-            'underlineMenuHeader'   => 'border-b-2 border-b-slate-600',
-            'textMenuHeader'        => 'hover:text-slate-400',
+            // Styles            
             'bgMenuColor'           => 'bg-slate-800',
-            'menuTextColor'         => 'text-slate-800',
-            'focusColor'            => 'focus:ring-slate-500 focus:border-slate-500',
+            'underlineMenu'         => 'border-b-2 border-b-yellow-400',
+            'bgNewColor'            => 'bg-yellow-400',
+            'newText'               => 'text-black text-sm',
+            'bgFilterColor'         => 'bg-lime-600',
+            'filterCategory'        => 'text-indigo-600',
+            'filterTag'             => 'text-teal-600',
+            'filterDate'            => 'text-amber-800',
+            'bgSearchColor'         => 'bg-sky-600',
+            'bgCriteriaColorOn'     => 'bg-amber-600',
+            'bgCriteriaColorOff'    => 'bg-slate-400',
+            'criteriaSearch'        => 'bg-sky-600 p-2 rounded-sm border-1 border-sky-600',
+            'criteriaCategory'      => 'bg-indigo-600 p-2 rounded-sm border-1 border-indigo-600',
+            'criteriaTag'           => 'bg-teal-600 p-2 rounded-sm border-1 border-teal-600',
+            'criteriaDate'          => 'bg-amber-800 p-2 rounded-sm border-1 border-amber-800',
+            'iconShow'              => 'text-amber-600',
+            'iconUpload'            => 'text-violet-600',
+            'iconEdit'              => 'text-teal-600',
+            'iconDelete'            => 'text-red-600',
+            'iconUnselect'          => 'text-blue-600',
+            'iconExcel'             => 'text-green-600',
+            'iconClose'             => 'text-red-600 hover:text-red-500',
+            'textError'             => 'text-red-500',
+            'tableHighlight'        => 'hover:bg-yellow-200',
+            'tableSelected'         => 'bg-teal-100',
+            'tableHeaderSelected'   => 'text-yellow-400',
+            'tableCellSelected'     => 'bg-blue-100 font-bold text-black transition-all duration-1000',
+            
             // Data
             'listEntriesIds'    => $this->listEntriesIds,
             'okselections'      => $this->okselections,

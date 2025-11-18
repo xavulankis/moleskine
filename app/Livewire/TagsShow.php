@@ -17,7 +17,10 @@ class TagsShow extends Component
     public function render()
     {
         return view('livewire.tags-show', [
-            'tag' => $this->tag
+            // Styles            
+            'bgMenuColor'   => 'bg-teal-800',
+            // Data
+            'tag'           => $this->tag
         ]);
     }    
 }

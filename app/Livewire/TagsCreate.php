@@ -68,6 +68,9 @@ class TagsCreate extends Component
    
     public function render()
     {
-        return view('livewire.tags-create');
+        return view('livewire.tags-create',[
+            // Styles            
+            'bgMenuColor'           => 'bg-teal-800',
+        ]);
     }
 }

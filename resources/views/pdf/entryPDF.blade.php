@@ -28,7 +28,7 @@
                 @if($archive == true)
                 <tr>
                     <td class="tdInfo">State</td>
-                    <td>Deleted</td>
+                    <td>Deleted on {{ $dateDeleted }}</td>
                 </tr>
                 @endif
                 <tr>

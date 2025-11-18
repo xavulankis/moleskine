@@ -82,7 +82,12 @@ class FileUpload extends Component
         //$this->entryService->authorization($this->entry);
 
         return view('livewire.file-upload', [
-            'entry' => $this->entry
+            // Styles            
+            'bgMenuColor'       => 'bg-violet-800',
+            'textColor'         => 'text-violet-800',
+            'underlineMenu'     => 'border-b-2 border-b-yellow-400',
+            // Data
+            'entry'             => $this->entry
         ]);
     }
 

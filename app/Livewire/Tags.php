@@ -95,12 +95,19 @@ class Tags extends Component
         $tags = $tags->paginate($this->perPage);
 
         return view('livewire.tags', [
-            'listEntriesIds'    => $this->listEntriesIds,
-            'okselections'      => $this->okselections,
-            'tags'    => $tags,
-            'found'   => $found,
-            'column'  => $this->orderColumn,
-            'total'   => $total,
+            // Styles            
+            'bgMenuColor'           => 'bg-teal-800',
+            'underlineMenu'         => 'border-b-2 border-b-yellow-400',
+            'bgNewColor'            => 'bg-yellow-400',
+            'newText'               => 'text-black text-sm',
+            'bgSearchColor'         => 'bg-slate-800',
+            // Data
+            'listEntriesIds'        => $this->listEntriesIds,
+            'okselections'          => $this->okselections,
+            'tags'                  => $tags,
+            'found'                 => $found,
+            'column'                => $this->orderColumn,
+            'total'                 => $total,
         ]);
     }
 }

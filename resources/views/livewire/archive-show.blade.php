@@ -9,7 +9,7 @@
     <div class="bg-zinc-200 overflow-hidden shadow-sm md:rounded-t-sm">
                 
         <!-- Header -->
-        <div class="flex flex-row text-white font-bold uppercase p-2 bg-amber-600">
+        <div class="flex flex-row text-white font-bold uppercase p-2 {{ $bgMenuColor }}">
             <span>information (archived)</span>
         </div>
         <!-- Actions -->
@@ -52,6 +52,24 @@
 
         <!-- INFO -->
         <div class="mx-auto w-11/12 mt-4 pb-4 rounded-sm flex flex-col gap-2">
+
+            <!-- State -->
+            <div class="flex flex-col md:flex-row gap-2">
+
+                <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
+                    <div class="bg-black text-white p-1 rounded-md">
+                        <i class="fa-solid fa-eraser"></i>
+                    </div>                    
+                    <div class="w-full">
+                        <span class="text-lg font-semibold capitalize">state</span>
+                    </div>                    
+                </div>
+                
+                <div class="flex flex-row justify-start items-center p-0 w-full">
+                    <span class="w-full rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400"><strong>Deleted on</strong> {{date_format($archive->deleted_at, 'd-m-Y H:i:s')}}</span>
+                </div>
+
+            </div>
 
             <!-- Id -->
             <div class="flex flex-col md:flex-row gap-2">
@@ -161,7 +179,7 @@
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-layer-group"></i>
+                        <i class="fa-solid fa-tags"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">tags</span>
@@ -184,79 +202,87 @@
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-money-bill"></i>
+                        <i class="fa-solid fa-align-left"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">description</span>
-                    </div>                    
+                    </div>
+                    
+                    @if (isset($archive->description))
+                    <div class="flex flex-row justify-start items-center p-2 md:hidden">
+                        <span x-data="{ show: false }" class="relative" data-tooltip="Copy Description">
+                            <button class="btn" data-clipboard-target="#description" x-on:click="show = true"
+                                x-on:mouseout="show = false" title="Copy Description">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                            <span x-show="show" class="absolute -top-8 -right-6">
+                                <span class="bg-green-600 text-white text-xs rounded-lg p-1 opacity-90">Copied!</span>
+                            </span>
+                        </span>
+                    </div>
+                    @endif
+                    
                 </div>
                 
-                <div class="flex flex-row justify-start items-center p-0 w-full">
-                    <span 
-                        class="w-full md:w-fit rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
+                <div class="flex flex-row justify-between items-center w-full">
+
+                    <div class="flex flex-row p-2 bg-zinc-100 w-full">                        
                         @if (isset($archive->description))  
-                            <span> {{ $archive->description}}</span>
+                            <span id="description"> {{ $archive->description}}</span>
                         @else 
                             <span>-</span>
-                        @endif 
-                    </span>
+                        @endif
+                    </div>
+
+                    @if (isset($archive->description))
+                    <div class="flex flex-row justify-start items-center p-2 max-sm:hidden">
+                        <span x-data="{ show: false }" class="relative" data-tooltip="Copy Description">
+                            <button class="btn cursor-pointer" data-clipboard-target="#description" x-on:click="show = true"
+                                x-on:mouseout="show = false" title="Copy Description">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                            <span x-show="show" class="absolute -top-8 -right-6">
+                                <span class="bg-green-600 text-white text-xs rounded-lg p-1 opacity-90">Copied!</span>
+                            </span>
+                        </span>
+                    </div>
+                    @endif
+
                 </div>
 
-            </div>     
+            </div>    
             
             <!-- URL -->
             <div class="flex flex-col md:flex-row gap-2">
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-link"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">url</span>
-                    </div>
-                    <div class="flex flex-row justify-start items-center p-2 md:hidden">
-                        <span x-data="{ show: false }" class="relative" data-tooltip="Copy Url">
-                            <button class="btn" data-clipboard-target="#url" x-on:click="show = true"
-                                x-on:mouseout="show = false" title="Copy Url">
-                                <i class="fa-solid fa-copy"></i>
-                            </button>
-                            <span x-show="show" class="absolute -top-8 -right-6">
-                                <span class="bg-green-600 text-white text-xs rounded-lg p-1 opacity-90">Copied!</span>
-                            </span>
-                        </span>
-                    </div>
+                    </div>                    
                 </div>
                 
-                <div class="flex flex-row justify-between items-center w-full">
-
-                    <div class="flex flex-row p-2 bg-zinc-100 w-full">
-                        <span 
-                        id="url">
-                        {{ $archive->url }}</span>
-                    </div>
-
-                    <div class="flex flex-row justify-start items-center p-2 max-sm:hidden">
-                        <span x-data="{ show: false }" class="relative" data-tooltip="Copy Url">
-                            <button class="btn cursor-pointer" data-clipboard-target="#url" x-on:click="show = true"
-                                x-on:mouseout="show = false" title="Copy Url">
-                                <i class="fa-solid fa-copy"></i>
-                            </button>
-                            <span x-show="show" class="absolute -top-8 -right-6">
-                                <span class="bg-green-600 text-white text-xs rounded-lg p-1 opacity-90">Copied!</span>
-                            </span>
-                        </span>
-                    </div>
-
+                <div class="flex flex-row justify-start items-center p-0 w-full">
+                    <span 
+                        class="w-full md:w-fit rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
+                        @if (isset($archive->url))  
+                            <span> <a href="{{$archive->url}}" target="_blank" title="Open"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></span>
+                        @else 
+                            <span>-</span>
+                        @endif 
+                    </span>
                 </div>
 
-            </div>                           
+            </div>                          
 
             <!-- Place -->
             <div class="flex flex-col md:flex-row gap-2">
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-money-bill"></i>
+                        <i class="fa-solid fa-location-dot"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">place</span>
@@ -281,7 +307,7 @@
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-money-bill"></i>
+                        <i class="fa-solid fa-circle-user"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">autor</span>
@@ -306,7 +332,7 @@
 
                 <div class="flex flex-row justify-start items-center md:w-1/3 gap-2">
                     <div class="bg-black text-white p-1 rounded-md">
-                        <i class="fa-solid fa-money-bill"></i>
+                        <i class="fa-solid fa-eur"></i>
                     </div>                    
                     <div class="w-full">
                         <span class="text-lg font-semibold capitalize">value</span>
@@ -334,7 +360,7 @@
                         <i class="fa-solid fa-info"></i>
                     </div>                    
                     <div class="w-full">
-                            <span class="text-lg font-semibold capitalize">extra information</span>
+                            <span class="text-lg font-semibold capitalize">information</span>
                         </div>
                     @if (strip_tags($archive->info) != '')
                     <div class="flex flex-row justify-start items-center p-2 md:hidden">
@@ -461,7 +487,7 @@
         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa-solid fa-angle-up"></i></button>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-center items-center p-2 mt-4 bg-amber-600 rounded-sm">
+        <div class="flex flex-row justify-center items-center p-2 mt-4 {{ $bgMenuColor }} rounded-sm">
             <span class="font-bold text-xs text-white">xavulankis 2025</span>
         </div>        
 

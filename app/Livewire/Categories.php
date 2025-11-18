@@ -96,12 +96,19 @@ class Categories extends Component
         $categories = $categories->paginate($this->perPage);
 
         return view('livewire.categories', [
-            'listEntriesIds'    => $this->listEntriesIds,
-            'okselections'      => $this->okselections,
-            'categories'    => $categories,
-            'found'         => $found,
-            'column'        => $this->orderColumn,
-            'total'         => $total,
+            // Styles            
+            'bgMenuColor'           => 'bg-indigo-800',
+            'underlineMenu'         => 'border-b-2 border-b-yellow-400',
+            'bgNewColor'            => 'bg-yellow-400',
+            'newText'               => 'text-black text-sm',
+            'bgSearchColor'         => 'bg-slate-800',
+            // Data
+            'listEntriesIds'        => $this->listEntriesIds,
+            'okselections'          => $this->okselections,
+            'categories'            => $categories,
+            'found'                 => $found,
+            'column'                => $this->orderColumn,
+            'total'                 => $total,
         ]);
     }
 }

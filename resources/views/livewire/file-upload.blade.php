@@ -12,13 +12,13 @@
     <div class="flex flex-row justify-start items-start gap-1 p-1 text-sm text-slate-600">
         <a href="/entries" class="hover:text-black">Entries</a> /
         <a href="/entries/show/{{$entry->id}}" class="hover:text-amber-600">Info</a> /
-        <a href="/entries/{{$entry->id}}/file" class="font-bold text-black border-b-2 border-b-violet-800">Upload</a>
+        <a href="/entries/{{$entry->id}}/file" class="font-bold text-black {{ $underlineMenu }}">Upload</a>
     </div>
 
     <div class="bg-zinc-200 overflow-hidden shadow-sm md:rounded-t-sm">
         
         <!-- Header -->
-        <div class="flex flex-row text-white font-bold uppercase p-2 bg-violet-800">
+        <div class="flex flex-row text-white font-bold uppercase p-2 {{ $bgMenuColor }}">
             <span>upload file</span>
         </div>
        
@@ -27,7 +27,7 @@
 
             <!-- Entry Info -->
             <div class="flex flex-col justify-start border-b-2 border-b-zinc-400 pb-1">                
-                <div class="flex flex-row text-violet-800 gap-2">
+                <div class="flex flex-row {{ $textColor }} gap-2">
                     <span class="w-16 font-bold text-lg capitalize">entry</span>
                     <span><a href="/entries/show/{{$entry->id}}" title="Open"><i class="fa-sm fa-solid fa-arrow-up-right-from-square"></i></a></span>
                 </div>
@@ -43,7 +43,7 @@
 
             <!-- Files stored -->
             <div class="flex flex-col">
-                <span class="font-bold text-violet-800 text-lg">Files stored ({{ $entry->files->count() }} of 5)</span>                
+                <span class="font-bold {{ $textColor }} text-lg">Files stored ({{ $entry->files->count() }} of 5)</span>                
             </div>
             @if ($entry->files->count() == 0)
                 <div class="flex flex-col">
@@ -92,7 +92,7 @@
                 <form wire:submit.prevent="save">
 
                     <div class="flex flex-row">
-                        <span class="text-lg text-violet-800 font-bold">Upload files</span>
+                        <span class="text-lg {{ $textColor }} font-bold">Upload files</span>
                     </div>
 
                     <div class="flex flex-row">
@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="flex flex-col text-sm">
-                            <span class="text-md text-violet-800 font-bold">Allowed formats</span>
+                            <span class="text-md {{ $textColor }} font-bold">Allowed formats</span>
                             <span class="font-semibold">PDF, JPG, JPEG, PNG, TXT, DOC, ODT.</span>
                             <span class="text-xs">Max Size File: 1 Gb</span>    
                     </div>
@@ -121,7 +121,7 @@
                             </button>
                         @else
                             <button
-                                class="w-full md:w-1/4 bg-black hover:bg-slate-600 text-white font-bold uppercase text-sm px-6 py-3 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-500"
+                                class="w-full md:w-1/4 bg-black hover:bg-green-800 text-white font-bold uppercase text-sm px-6 py-3 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-500"
                                 type="submit">                        
                                 upload file
                             </button>        
@@ -161,7 +161,7 @@
             <div class="flex flex-col">
                     @if (count($files) !== 0)
                         <div class="flex flex-row">
-                            <span class="text-lg text-violet-800 font-bold">Files selected to upload
+                            <span class="text-lg {{ $textColor }} font-bold">Files selected to upload
                                 ({{ count($files) }})</span>
                         </div>
                         <div class="overflow-x-auto">        
@@ -215,7 +215,7 @@
         </div>    
 
         <!-- Footer -->
-        <div class="flex flex-row justify-center items-center p-2 mt-4 bg-violet-800 rounded-sm">
+        <div class="flex flex-row justify-center items-center p-2 mt-4 {{ $bgMenuColor }} rounded-sm">
             <span class="font-bold text-xs text-white">xavulankis 2025</span>
         </div>
 

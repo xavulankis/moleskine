@@ -66,6 +66,8 @@ class PDFController extends Controller
         $dateTime = DateTime::createFromFormat('Y-m-d', $data->date);
         $dataToPdf["date"] = date_format($dateTime, 'd-m-Y');
         
+        $dataToPdf["dateDeleted"] = date_format($data->deleted_at, 'd-m-Y H:i:s');
+        
         ($data->status == 0 ?  $dataToPdf["status"] = 'Complete' :  $dataToPdf["status"]  = 'Pending');
         
         $dataToPdf["user_name"] = $data->user->name;

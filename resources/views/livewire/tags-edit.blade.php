@@ -10,7 +10,7 @@
     <div class="bg-zinc-200 overflow-hidden shadow-sm md:rounded-t-sm">
 
         <!-- Header -->
-        <div class="flex flex-row text-white font-bold uppercase p-2 bg-green-600">
+        <div class="flex flex-row text-white font-bold uppercase p-2 {{ $bgMenuColor }}">
             <span>edit tag</span>
         </div>
 
@@ -54,7 +54,7 @@
                 <!-- Save -->
                 <div class="flex flex-col md:items-end">
                     <button type="submit"
-                        class="w-full md:w-1/4 bg-green-600 hover:bg-green-800 text-white font-semibold uppercase p-2 rounded-md shadow-none transition duration-1000 ease-in-out cursor-pointer">
+                        class="w-full md:w-1/4 {{ $bgMenuColor }} hover:bg-green-800 text-white font-semibold uppercase p-2 rounded-md shadow-none transition duration-1000 ease-in-out cursor-pointer">
                         Save
                     </button>
                 </div>
@@ -64,7 +64,7 @@
         </form>    
         
         <!-- Footer -->
-        <div class="flex flex-row justify-center items-center p-2 mt-4 bg-green-600 rounded-b-sm">
+        <div class="flex flex-row justify-center items-center p-2 mt-4 {{ $bgMenuColor }} rounded-b-sm">
             <span class="font-bold text-xs text-white">xavulankis 2025</span>
         </div> 
 
