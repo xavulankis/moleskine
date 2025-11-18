@@ -99,7 +99,7 @@
                 <div class="flex flex-row justify-start items-center p-0 w-full">
                     <span 
                         class="w-full md:w-fit rounded-sm bg-zinc-100 border-1 border-zinc-300 text-gray-900 p-2 focus:border-black focus:outline-hidden focus:ring-blue-400 focus:border-blue-400">
-                        {{ $entry->date }}</span>
+                        {{ date('d-m-Y', strtotime($entry->date)) }}</span>
                 </div>
 
             </div>

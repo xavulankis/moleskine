@@ -96,7 +96,9 @@ class EntryExport implements FromCollection, WithMapping, WithHeadings, WithStyl
        
         $sanitizedInfo = strip_tags($entry->info);
 
-        return [$entry->id, $entry->date, $entry->title, $entry->description, $entry->url, $entry->place, $entry->autor, $entry->value, $entry->category->name, $tags, $files, $sanitizedInfo, date_format($entry->created_at, 'd-m-Y'), date_format($entry->updated_at, 'd-m-Y')];
+        $dateFormated = date('d-m-Y', strtotime($entry->date));
+
+        return [$entry->id, $dateFormated, $entry->title, $entry->description, $entry->url, $entry->place, $entry->autor, $entry->value, $entry->category->name, $tags, $files, $sanitizedInfo, date_format($entry->created_at, 'd-m-Y'), date_format($entry->updated_at, 'd-m-Y')];
     }
 
     /**
@@ -106,7 +108,7 @@ class EntryExport implements FromCollection, WithMapping, WithHeadings, WithStyl
      */
     public function headings(): array
     {        
-        return ['ID', 'DATE', 'TITLE', 'DESCRIPTION', 'URL', 'PLACE', 'AUTOR', 'VALUE', 'CATEGORY', 'TAGS', 'FILES', 'INFO', 'CREATED', 'UPDATED'];
+        return ['ID', 'DATE', 'TITLE', 'DESCRIPTION', 'URL', 'PLACE', 'AUTHOR', 'VALUE', 'CATEGORY', 'TAGS', 'FILES', 'INFO', 'CREATED', 'UPDATED'];
     }
 
     /**
@@ -285,67 +287,125 @@ class EntryExport implements FromCollection, WithMapping, WithHeadings, WithStyl
     public function styles(Worksheet $sheet)
     {
         $totalRows = count($this->listIds);
-        return [
-            // Style the first row as bold text.
-            1 => [
-                'font' => [
-                    'name' => 'Arial',
-                    'bold' => true,
-                    'italic' => false,
-                    'strikethrough' => false,
-                    'color' => [
-                        'rgb' => 'FFFFFF',
-                    ],
-                ],
-                'fill' => [
-                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
-                    'rotation' => 90,
-                    'startColor' => [
-                        'argb' => '16a34a',
-                    ],
-                    'endColor' => [
-                        'argb' => '16a34a',
-                    ],
-                ],
-                'alignment' => [
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-                    'wrapText' => false,
-                ],
-                'borders' => [
-                    'bottom' => [
-                        'borderStyle' => Border::BORDER_THICK,
-                        'color' => [
-                            'rgb' => '000000',
+        //dd($this->entryType);
+
+        if ($this->entryType == 'archive')
+            {
+                return [
+                    // Style the first row as bold text.
+                    1 => [
+                        'font' => [
+                            'name' => 'Arial',
+                            'bold' => true,
+                            'italic' => false,
+                            'strikethrough' => false,
+                            'color' => [
+                                'rgb' => 'FFFFFF',
+                            ],
+                        ],
+                        'fill' => [
+                            'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
+                            'rotation' => 90,
+                            'startColor' => [
+                                'argb' => 'D2042D',
+                            ],
+                            'endColor' => [
+                                'argb' => 'D2042D',
+                            ],
+                        ],
+                        'alignment' => [
+                            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                            'wrapText' => false,
+                        ],
+                        'borders' => [
+                            'bottom' => [
+                                'borderStyle' => Border::BORDER_THICK,
+                                'color' => [
+                                    'rgb' => '000000',
+                                ],
+                            ],
+                            'top' => [
+                                'borderStyle' => Border::BORDER_THICK,
+                                'color' => [
+                                    'rgb' => '000000',
+                                ],
+                            ],
+                            'left' => [
+                                'borderStyle' => Border::BORDER_THICK,
+                                'color' => [
+                                    'rgb' => '000000',
+                                ],
+                            ],
+                            'right' => [
+                                'borderStyle' => Border::BORDER_THICK,
+                                'color' => [
+                                    'rgb' => '000000',
+                                ],
+                            ],
                         ],
                     ],
-                    'top' => [
-                        'borderStyle' => Border::BORDER_THICK,
-                        'color' => [
-                            'rgb' => '000000',
+                    
+                ];            
+            }
+            // Export normal Entry
+            else {
+                return [
+                    // Style the first row as bold text.
+                    1 => [
+                        'font' => [
+                            'name' => 'Arial',
+                            'bold' => true,
+                            'italic' => false,
+                            'strikethrough' => false,
+                            'color' => [
+                                'rgb' => 'FFFFFF',
+                            ],
                         ],
-                    ],
-                    'left' => [
-                        'borderStyle' => Border::BORDER_THICK,
-                        'color' => [
-                            'rgb' => '000000',
+                        'fill' => [
+                            'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
+                            'rotation' => 90,
+                            'startColor' => [
+                                'argb' => '16a34a',
+                            ],
+                            'endColor' => [
+                                'argb' => '16a34a',
+                            ],
                         ],
-                    ],
-                    'right' => [
-                        'borderStyle' => Border::BORDER_THICK,
-                        'color' => [
-                            'rgb' => '000000',
+                        'alignment' => [
+                            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                            'wrapText' => false,
                         ],
-                    ],
-                ],
-            ],
-            /* 'A2:K' . $totalRows + 1 => [
-                'alignment' => [
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
-                    'wrapText' => false,
-                ],
-            ], */
-        ];
+                        'borders' => [
+                            'bottom' => [
+                                'borderStyle' => Border::BORDER_THICK,
+                                'color' => [
+                                    'rgb' => '000000',
+                                ],
+                            ],
+                            'top' => [
+                                'borderStyle' => Border::BORDER_THICK,
+                                'color' => [
+                                    'rgb' => '000000',
+                                ],
+                            ],
+                            'left' => [
+                                'borderStyle' => Border::BORDER_THICK,
+                                'color' => [
+                                    'rgb' => '000000',
+                                ],
+                            ],
+                            'right' => [
+                                'borderStyle' => Border::BORDER_THICK,
+                                'color' => [
+                                    'rgb' => '000000',
+                                ],
+                            ],
+                        ],
+                    ],                    
+                ];            
+            }
+        
     }
 }

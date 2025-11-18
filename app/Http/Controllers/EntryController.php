@@ -59,20 +59,20 @@ class EntryController extends Controller
         {
             if ($request->entryType == 'archive')
             {
-                $excelFileName = 'Moleskine_Archive_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Archive_'. date('d-m-Y',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
             }
             else {
-                $excelFileName = 'Moleskine_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_'. date('d-m-Y',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
             }            
         }
         else {
 
             if ($request->entryType == 'archive')
             {
-                $excelFileName = 'Moleskine_Archive_'. date('Y-m-d',time()) . '_Total('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Archive_'. date('d-m-Y',time()) . '_Total('. count($listIds) .').xlsx';
             }
             else {
-                $excelFileName = 'Moleskine_'. date('Y-m-d',time()) . '_Total('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_'. date('d-m-Y',time()) . '_Total('. count($listIds) .').xlsx';
             }
         }
         
@@ -102,20 +102,20 @@ class EntryController extends Controller
         {
             if ($request->entryType == 'archive')
             {
-                $excelFileName = 'Moleskine_Archive_Bulk_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Archive_Bulk_'. date('d-m-Y',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
             }
             else {
-                $excelFileName = 'Moleskine_Bulk_'. date('Y-m-d',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Bulk_'. date('d-m-Y',time()) . '_CRITERIA_' . $criteriaName . 'Found('. count($listIds) .').xlsx';
             }            
         }
         else {
 
             if ($request->entryType == 'archive')
             {
-                $excelFileName = 'Moleskine_Archive_Bulk_'. date('Y-m-d',time()) . '_Total('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Archive_Bulk_'. date('d-m-Y',time()) . '_Total('. count($listIds) .').xlsx';
             }
             else {
-                $excelFileName = 'Moleskine_Bulk_'. date('Y-m-d',time()) . '_Total('. count($listIds) .').xlsx';
+                $excelFileName = 'Moleskine_Bulk_'. date('d-m-Y',time()) . '_Total('. count($listIds) .').xlsx';
             }
         }
 
