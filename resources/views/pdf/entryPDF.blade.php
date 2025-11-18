@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Entry Information - ID({{ $id }})</title>
+    <title>PDF download</title>
     <!-- CSS, DomPDF requires using the absolute local path to the CSS file -->
     <link href="{{ public_path('css/pdfTable.css') }}" rel="stylesheet">
 </head>
@@ -13,12 +13,24 @@
         <table>
 
             {{-- <thead> --}}
+            @if($archive == false)
             <tr>
-                <td class="tdHeader" colspan="2">Entry Information</td>
+                <td class="tdHeader" colspan="2">MOLESKINE - Entry Information</td>
             </tr>
+            @else
+            <tr>
+                <td class="tdHeaderArchive" colspan="2">MOLESKINE - Archive Information</td>
+            </tr>
+            @endif
             {{-- </thead> --}}
 
             <tbody>
+                @if($archive == true)
+                <tr>
+                    <td class="tdInfo">State</td>
+                    <td>Deleted</td>
+                </tr>
+                @endif
                 <tr>
                     <td class="tdInfo">Id</td>
                     <td>{{ $id }}</td>

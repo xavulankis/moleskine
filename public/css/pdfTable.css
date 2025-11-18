@@ -73,7 +73,7 @@ table {
 }
 
 table td {
-	padding: 15px;
+	padding: 10px;
     word-wrap: break-word;
     
 }
@@ -99,6 +99,19 @@ table tbody td {
 
 .tdHeader {
     background-color: #000;
+	color: #ffffff;
+	font-weight: normal;
+	font-size: 1rem;
+    text-align: left;
+    text-transform: capitalize;
+    padding: 25px 0px 25px 15px;
+	border: 0px solid #54585d;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.tdHeaderArchive {
+    background-color: #FF0000;
 	color: #ffffff;
 	font-weight: normal;
 	font-size: 1rem;

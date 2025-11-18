@@ -19,9 +19,10 @@ class PDFController extends Controller
         $dataToPdf = $dataToPdf->toArray();
 
         // Convert the string to a DateTime object
-        $dateTime = DateTime::createFromFormat('Y-d-m', $data->date);
+        
+        $dateTime = DateTime::createFromFormat('Y-m-d', $data->date);
         $dataToPdf["date"] = date_format($dateTime, 'd-m-Y');
-                
+        //dd($dataToPdf["date"]);        
         
         $dataToPdf["user_name"] = $data->user->name;
         $dataToPdf["category_name"] = $data->category->name;
@@ -40,10 +41,12 @@ class PDFController extends Controller
             }
         } 
         //dd($dataToPdf);
+
+        $dataToPdf["archive"] = false;
         
         $pdf = PDF::loadView('pdf.entryPDF', $dataToPdf);
         
-        $documentName = $data->user->name . '_entry_' . $data->id . '.pdf';
+        $documentName = 'Moleskine_entry_ID_' . $data->id . '.pdf';
 
         return $pdf->download($documentName);
        
@@ -60,7 +63,7 @@ class PDFController extends Controller
         $dataToPdf = $dataToPdf->toArray();
 
         // Convert the string to a DateTime object
-        $dateTime = DateTime::createFromFormat('Y-d-m', $data->date);
+        $dateTime = DateTime::createFromFormat('Y-m-d', $data->date);
         $dataToPdf["date"] = date_format($dateTime, 'd-m-Y');
         
         ($data->status == 0 ?  $dataToPdf["status"] = 'Complete' :  $dataToPdf["status"]  = 'Pending');
@@ -80,11 +83,13 @@ class PDFController extends Controller
             {
                 $dataToPdf["files"][$key] = $file->toArray();
             }
-        } 
+        }
+
+        $dataToPdf["archive"] = true;
         
         $pdf = PDF::loadView('pdf.entryPDF', $dataToPdf);
         
-        $documentName = $data->user->name . '_ARCHIVE_entry_' . $data->id . '.pdf';
+        $documentName = 'Moleskine_archive_entry_ID_' . $data->id . '.pdf';
 
         return $pdf->download($documentName);
        
