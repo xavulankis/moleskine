@@ -7,19 +7,69 @@
         <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-            <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
+            <a href="{{ route('mainboard.index') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
                 <x-app-logo />
             </a>
 
-            <flux:navlist variant="outline">
+            <!-- <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="pencil-square" :href="route('entries.index')" :current="request()->routeIs('entries')" wire:navigate class="bg-black">{{ __('Entries') }}</flux:navlist.item>
+                    <flux:navlist.item class="bg-black hover:bg-red-400" icon="pencil-square" :href="route('entries.index')" :current="request()->routeIs('entries')" wire:navigate><span class="text-white hover:text-green-600">{{ __('Entries') }}</span></flux:navlist.item>
                     <flux:navlist.item icon="archive-box" :href="route('archive.index')" :current="request()->routeIs('archive')" wire:navigate class="bg-red-400">{{ __('Archive') }}</flux:navlist.item>
                     <flux:navlist.item icon="rectangle-group" :href="route('categories.index')" :current="request()->routeIs('categories')" wire:navigate class="bg-indigo-600">{{ __('Categories') }}</flux:navlist.item>
                     <flux:navlist.item icon="tag" :href="route('tags.index')" :current="request()->routeIs('tags')" wire:navigate class="bg-teal-600">{{ __('Tags') }}</flux:navlist.item>
                 </flux:navlist.group>
-            </flux:navlist>
+            </flux:navlist> -->
+
+            <!-- TEST SIDEBAR -->            
+
+            <div class="flex flex-col gap-2 text-white">
+                <!-- Entries -->
+                <a href="{{ route('entries.index') }}">
+                    <div class="flex flex-row justify-start items-center bg-black hover:bg-yellow-400 hover:text-black gap-2 p-1 rounded-sm">
+                        <div class="w-fit px-2">
+                            <i class="fa-solid fa-pencil fa-xs"></i>
+                        </div>                    
+                        <div class="w-full">
+                            {{ __('Entries') }}
+                        </div>                    
+                    </div>
+                </a>
+                <!-- Archive -->
+                <a href="{{ route('archive.index') }}">
+                    <div class="flex flex-row justify-start items-center bg-red-800 hover:bg-yellow-400 hover:text-black gap-2 p-1 rounded-sm">
+                        <div class="w-fit px-2">
+                            <i class="fa-solid fa-box-archive fa-xs"></i>
+                        </div>                    
+                        <div class="w-full">
+                            {{ __('Archives') }}
+                        </div>                    
+                    </div>
+                </a>
+                <!-- Categories -->
+                <a href="{{ route('categories.index') }}">
+                <div class="flex flex-row justify-start items-center bg-indigo-600 hover:bg-yellow-400 hover:text-black gap-2 p-1 rounded-sm">
+                    <div class="w-fit px-2">
+                        <i class="fa-solid fa-layer-group fa-xs"></i>
+                    </div>                    
+                    <div class="w-full">
+                        {{ __('Categories') }}
+                    </div>                    
+                </div>
+                </a>
+                <!-- Tags -->
+                <a href="{{ route('tags.index') }}">
+                <div class="flex flex-row justify-start items-center bg-teal-600 hover:bg-yellow-400 hover:text-black gap-2 p-1 rounded-sm">
+                    <div class="w-fit px-2">
+                        <i class="fa-solid fa-tag fa-xs"></i>
+                    </div>                    
+                    <div class="w-full">
+                        {{ __('Tags') }}
+                    </div>                    
+                </div>
+                </a>                
+            </div>
+
 
             <flux:spacer />
 

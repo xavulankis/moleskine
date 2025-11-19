@@ -17,6 +17,7 @@ use App\Livewire\EntriesCreate;
 use App\Livewire\EntriesEdit;
 use App\Livewire\EntriesShow;
 use App\Livewire\FileUpload;
+use App\Livewire\MainBoard;
 use App\Livewire\Tags;
 use App\Livewire\TagsCreate;
 use App\Livewire\TagsEdit;
@@ -51,6 +52,9 @@ Route::middleware(['auth'])->group(function () {
             ),
         )
         ->name('two-factor.show');
+
+    /* MAIN BOARD */
+    Route::get('/mainboard', MainBoard::class)->name('mainboard.index');        
 
     
     /* ENTRIES */
