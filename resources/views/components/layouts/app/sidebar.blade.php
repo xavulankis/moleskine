@@ -67,7 +67,18 @@
                         {{ __('Tags') }}
                     </div>                    
                 </div>
-                </a>                
+                </a>    
+                <!-- Contacts -->
+                <a href="{{ route('contacts.index') }}">
+                <div class="flex flex-row justify-start items-center bg-amber-600 hover:bg-yellow-400 hover:text-black gap-2 p-1 rounded-sm">
+                    <div class="w-fit px-2">
+                        <i class="fa-solid fa-circle-user fa-xs"></i>
+                    </div>                    
+                    <div class="w-full">
+                        {{ __('Contacts') }}
+                    </div>                    
+                </div>
+                </a>            
             </div>
 
 

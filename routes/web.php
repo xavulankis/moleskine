@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PDFController;
@@ -12,6 +13,10 @@ use App\Livewire\Categories;
 use App\Livewire\CategoriesCreate;
 use App\Livewire\CategoriesEdit;
 use App\Livewire\CategoriesShow;
+use App\Livewire\Contacts;
+use App\Livewire\ContactsCreate;
+use App\Livewire\ContactsEdit;
+use App\Livewire\ContactsShow;
 use App\Livewire\Entries;
 use App\Livewire\EntriesCreate;
 use App\Livewire\EntriesEdit;
@@ -100,5 +105,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
     Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
     Route::get('/tags/edit/{tag}', TagsEdit::class)->name('tags.edit');
+
+    /* CONTACTS */
+    Route::get('/contacts', Contacts::class)->name('contacts.index');
+    Route::get('/contacts/create', ContactsCreate::class)->name('contacts.create');
+    Route::get('/contacts/show/{contact}', ContactsShow::class)->name('contacts.show');
+    Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+    Route::get('/contacts/edit/{contact}', ContactsEdit::class)->name('contacts.edit');    
 
 });

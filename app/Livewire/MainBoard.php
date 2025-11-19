@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Contact;
 use App\Models\Entry;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -33,12 +35,25 @@ class MainBoard extends Component
         
         $notifications = Entry::where('date', '>=', today())->orderby('date', 'ASC')->get();
 
+        // Birthdays
+        $dayOfYear = today()->dayOfYear;
+        //dd($dayOfYear);
+        //$cumples = Contact::where('birthdate'birthdate between $dayOfYear and $dayOfYear+60")->get();
+        //$years = Carbon::parse('23-07-1982')->age;
+
+        $today = now();
+        $birthdays=Contact::whereMonth('birthdate',$today->month)
+            ->whereDay('birthdate',$today->day)
+            ->get();
+
+        
         return view('livewire.main-board',[
             // Styles
             'iconShow'              => 'text-black',
             // Data
             'entries'               => $data,
             'notifications'         => $notifications,
+            'birthdays'             => $birthdays,
         ]);
     }
 }

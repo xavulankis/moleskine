@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreTagRequest extends FormRequest
 {
@@ -22,7 +23,8 @@ class StoreTagRequest extends FormRequest
     public function rules(): array
     {
        return [
-           'name' => 'bail|required|min:3|string|unique:tags,name'
+           //'name' => 'bail|required|min:3|string|unique:tags,name'
+           'name' => 'bail|required|min:3|string|' . Rule::unique('tags')->ignore($this->tag),
         ];
     }
 }
