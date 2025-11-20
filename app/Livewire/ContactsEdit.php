@@ -35,7 +35,7 @@ class ContactsEdit extends Component
 
     protected function rules(): array
     {
-        return (new StoreContactRequest())->rules($this->contact);
+        return (new StoreContactRequest())->rules(true, $this->contact);
     }
 
     protected function messages(): array

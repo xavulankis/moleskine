@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Http\Requests\StoreContactRequest;
 use App\Livewire\Texteditor\Quill;
 use App\Models\Contact;
 use Illuminate\Http\Request;
@@ -22,22 +21,23 @@ class ContactsCreate extends Component
     public $birthdate;
     public $info;
 
-    /**
-     * USE LARAVEL FORM REQUEST IN LIVEWIRE
-     * In Livewire Component you can add rules in the rules() method by returning an array. 
-     * In this method, you can return the rules() method from your Form Request. 
-     * Just don't forget that public properties in Livewire Component need to be the same name as in the rules.
-     */
+    protected $rules = [
+        'type'              => 'required',
+        'first_name'        => 'required|min:2',
+        'last_name'         => 'required|min:2',
+        'phone'             => 'nullable',
+        'email'             => 'nullable',
+        'address'           => 'nullable',
+        'city'              => 'nullable',
+        'location'          => 'nullable',
+        'birthdate'         => 'nullable',
+        'info'              => 'nullable|min:3'
+    ];
 
-    protected function rules(): array
-    {
-        return (new StoreContactRequest())->rules(false);
-    }
+    protected $messages = [
+        'type.required' => 'Select one type.',
 
-    protected function messages(): array
-    {
-        return (new StoreContactRequest())->messages();
-    }
+    ];
 
     /* Quill Editor - removing spaces  */
  
