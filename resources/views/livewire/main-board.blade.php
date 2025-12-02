@@ -97,13 +97,13 @@
                                     
                                     <!-- TABLE BODY -->
                                     <tbody>
-                                        @foreach ($notifications as $entry)
+                                        @foreach ($notifications as $entry)                                        
                                             <!-- Color Code Pending Tasks -->
-                                            @if(date('d-m-Y', strtotime($entry->date)) == date('d-m-Y'))
+                                            @if(date('Y-m-d', strtotime($entry->date)) == date('Y-m-d'))
                                             <tr class="bg-red-300">
-                                            @elseif(date('d-m-Y', strtotime($entry->date)) <= date('d-m-Y', strtotime('+7 days')))
+                                            @elseif(date('Y-m-d', strtotime($entry->date)) <= date('Y-m-d', strtotime('+7 days')))
                                                 <tr class="bg-amber-300">
-                                            @elseif(date('d-m-Y', strtotime($entry->date)) > date('d-m-Y', strtotime('+7 days')))
+                                            @elseif(date('Y-m-d', strtotime($entry->date)) > date('Y-m-d', strtotime('+7 days')))
                                                 <tr class="bg-green-300">
                                             @endif                                    
                                                 <td class="p-2 pr-12 ">{{ date('d-m-Y', strtotime($entry->date)) }}</td>
