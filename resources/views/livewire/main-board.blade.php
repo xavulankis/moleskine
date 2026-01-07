@@ -69,7 +69,7 @@
             
             <!-- TASKS -->
             <div class="flex flex-col"> 
-                <span class="text-xl font-semibold p-1">Pending Tasks 1</span>
+                <span class="text-xl font-semibold p-1">Pending Tasks</span>
                 
                 <div class="flex md:flex-row flex-col justify-start md:items-center items-left gap-2 text-xs mt-4 mb-2">
                     <span class="bg-red-300 p-1 rounded-sm font-bold capitalize w-fit">today</span>
